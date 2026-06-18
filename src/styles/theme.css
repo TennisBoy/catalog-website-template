@@ -1,0 +1,60 @@
+/* ============================================================
+   "The Card Catalog": warm paper-and-ink archive aesthetic.
+   Design tokens. Category accent colors live in data/categories.ts
+   (they're data, not theme) and are applied inline.
+   ============================================================ */
+
+:root {
+  /* Surfaces: warm paper, not cold slate */
+  --paper: #f4efe3;
+  --paper-2: #ece4d2;
+  --surface: #fffdf7;
+  --surface-sunken: #faf5ea;
+  --border: #e0d6c2;
+  --border-strong: #cabfa6;
+
+  /* Ink */
+  --ink: #211c16;
+  --ink-soft: #4a4035;
+  --ink-muted: #8a7d6a;
+
+  /* Action color: deep "library green", warm and bookish */
+  --primary: #1f4d3f;
+  --primary-press: #163a2f;
+  --primary-tint: #e4ede8;
+  --on-primary: #f6f1e4;
+
+  /* Feedback */
+  --danger: #b3261e;
+  --danger-tint: #f7e3e1;
+  --warn: #a8700a;
+  --warn-tint: #fbeecb;
+  --success: #1f7a44;
+
+  /* Typography */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Hanken Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing scale */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+
+  /* Radius */
+  --r-card: 14px;
+  --r-input: 10px;
+  --r-pill: 999px;
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgba(33, 28, 22, 0.06), 0 1px 1px rgba(33, 28, 22, 0.04);
+  --shadow-float: 0 10px 30px rgba(33, 28, 22, 0.18);
+
+  /* Layout */
+  --nav-w: 248px;
+  --bottombar-h: 64px;
+  --maxw: 1080px;
+}

@@ -1,0 +1,161 @@
+/* ============================================================
+   Shelf View: a map of the physical room.
+   --shelf-accent is set inline per category (categoryColor).
+   ============================================================ */
+
+/* ---- Category section header ---- */
+.shelf-cat-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-left: 5px solid var(--shelf-accent);
+  border-radius: var(--r-input);
+  background: color-mix(in srgb, var(--shelf-accent) 9%, var(--surface));
+  margin-bottom: var(--s4);
+}
+.shelf-cat-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--shelf-accent);
+}
+.shelf-cat-copies {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--shelf-accent);
+  white-space: nowrap;
+}
+
+/* ---- Shelf grid + cards ---- */
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--s3);
+}
+.shelf-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: var(--s4);
+  text-align: left;
+  background: var(--surface);
+  border-top: 4px solid var(--shelf-accent);
+  min-height: 110px;
+  transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.shelf-card:hover {
+  box-shadow: var(--shadow-float);
+  transform: translateY(-2px);
+}
+.shelf-card:active {
+  transform: translateY(0);
+}
+.shelf-card--flag {
+  border-color: var(--warn);
+  background: color-mix(in srgb, var(--warn-tint) 55%, var(--surface));
+}
+.shelf-card-id {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: var(--s1);
+}
+.shelf-card-warn {
+  font-size: 1rem;
+  color: var(--warn);
+}
+.shelf-card-meta {
+  font-size: 0.85rem;
+}
+
+/* ---- Shelf detail ---- */
+.shelf-back {
+  align-self: flex-start;
+  padding-left: 0;
+  margin-bottom: var(--s2);
+  color: var(--primary);
+}
+.shelf-detail-title {
+  font-size: clamp(1.4rem, 1.1rem + 1.4vw, 1.9rem);
+}
+.shelf-label-btn {
+  margin-top: var(--s4);
+}
+.shelf-titles {
+  padding: var(--s2) var(--s4);
+}
+.shelf-titles li + li {
+  border-top: 1px solid var(--border);
+}
+.shelf-title-row,
+.shelf-unshelved-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s3) 0;
+  color: inherit;
+  text-decoration: none;
+  min-height: 44px;
+}
+.shelf-title-row:hover,
+.shelf-unshelved-row:hover {
+  text-decoration: none;
+}
+.shelf-title-row:hover .shelf-title-name,
+.shelf-unshelved-row:hover .shelf-title-name {
+  text-decoration: underline;
+}
+.shelf-title-main,
+.shelf-unshelved-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  min-width: 0;
+}
+.shelf-title-name {
+  font-weight: 600;
+  color: var(--ink);
+}
+.shelf-title-qty {
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+
+/* ---- Unshelved catch-all ---- */
+.shelf-unshelved {
+  padding: var(--s4);
+  border-left: 5px solid var(--warn);
+  background: color-mix(in srgb, var(--warn-tint) 40%, var(--surface));
+}
+.shelf-unshelved-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s2);
+}
+.shelf-unshelved-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--warn);
+}
+.shelf-unshelved-list li + li {
+  border-top: 1px solid var(--border);
+}
+.shelf-all-clear {
+  padding: var(--s4);
+  text-align: center;
+}

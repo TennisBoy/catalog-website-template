@@ -1,0 +1,352 @@
+/* ============================================================
+   Label Generator: "card catalog" builder + printable sheet.
+   On-screen: warm paper controls. Print: just the labels.
+   ============================================================ */
+
+/* ---- Builder controls ---- */
+.lbl-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s5);
+  padding: var(--s5);
+}
+
+.lbl-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.lbl-field__label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.lbl-field__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  flex-wrap: wrap;
+}
+
+.lbl-field--inline {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s5);
+}
+
+/* Segmented control */
+.lbl-seg {
+  display: inline-flex;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-pill);
+  padding: 3px;
+  gap: 2px;
+}
+
+.lbl-seg__btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-weight: 600;
+  padding: var(--s2) var(--s5);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.lbl-seg__btn:hover {
+  color: var(--ink);
+}
+
+.lbl-seg__btn.is-active {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+/* Pick buttons */
+.lbl-pickbtns {
+  display: inline-flex;
+  gap: var(--s2);
+}
+
+.lbl-mini {
+  padding: var(--s1) var(--s3);
+  font-size: 0.85rem;
+}
+
+.lbl-noopts {
+  margin: 0;
+  padding: var(--s4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-input);
+  background: var(--surface-sunken);
+}
+
+/* Checklist */
+.lbl-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--s2);
+}
+
+.lbl-check {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s2) var(--s3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-input);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.lbl-check:hover {
+  border-color: var(--border-strong);
+}
+
+.lbl-check.is-checked {
+  border-color: var(--primary);
+  background: var(--primary-tint);
+}
+
+.lbl-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  flex: none;
+}
+
+.lbl-check__swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  flex: none;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.lbl-check__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.lbl-check__name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lbl-check__sub {
+  font-size: 0.78rem;
+}
+
+/* Color band toggle */
+.lbl-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.lbl-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.lbl-future {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.lbl-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  flex-wrap: wrap;
+}
+
+.lbl-print {
+  font-size: 1.05rem;
+  padding: var(--s3) var(--s6);
+}
+
+.lbl-print:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lbl-count {
+  font-size: 0.9rem;
+}
+
+/* ---- Preview heading + empty ---- */
+.lbl-preview-h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: var(--s6) 0 var(--s4);
+}
+
+.lbl-preview-empty {
+  margin-top: var(--s3);
+}
+
+/* ---- The label sheet (preview + print) ---- */
+.lbl-sheet {
+  display: grid;
+  gap: var(--s4);
+}
+
+.lbl-sheet--large {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.lbl-sheet--medium {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.lbl-label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  overflow: hidden;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  min-height: 150px;
+}
+
+.lbl-sheet--medium .lbl-label {
+  min-height: 110px;
+}
+
+.lbl-label__band {
+  height: 22px;
+  background: var(--lbl-accent);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.lbl-sheet--large .lbl-label__band {
+  height: 28px;
+}
+
+.lbl-label__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--s2);
+  padding: var(--s5) var(--s4);
+}
+
+.lbl-label__cat {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.02;
+  color: #111;
+  font-size: 1.9rem;
+}
+
+.lbl-sheet--large .lbl-label__cat {
+  font-size: 2.4rem;
+}
+
+.lbl-label__line {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #222;
+  font-size: 1.25rem;
+}
+
+.lbl-sheet--large .lbl-label__line {
+  font-size: 1.6rem;
+}
+
+@media (max-width: 540px) {
+  .lbl-controls {
+    padding: var(--s4);
+  }
+  .lbl-field--inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ============================================================
+   PRINT: only the label sheet survives. Hide all app chrome
+   and the builder; lay labels out as a clean breaking grid.
+   ============================================================ */
+@media print {
+  /* App chrome lives outside this file but is safe to hide for print. */
+  .sidebar,
+  .topbar,
+  .bottombar,
+  .fab {
+    display: none !important;
+  }
+
+  /* This screen's own chrome. */
+  .lbl-head,
+  .lbl-controls,
+  .lbl-preview-h2,
+  .lbl-preview-empty {
+    display: none !important;
+  }
+
+  /* Neutralize app layout padding so labels use the full page. */
+  .page {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .lbl-sheet {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10mm;
+    padding: 8mm;
+  }
+
+  .lbl-label {
+    border: 2px solid #000;
+    min-height: 60mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .lbl-label__band {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  @page {
+    margin: 10mm;
+  }
+}

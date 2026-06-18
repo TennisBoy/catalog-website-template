@@ -1,0 +1,66 @@
+.det__back {
+  display: inline-block;
+  margin-bottom: var(--s4);
+  font-weight: 600;
+}
+.det__head {
+  margin-bottom: var(--s5);
+}
+.det__tags {
+  display: flex;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  margin-top: var(--s3);
+}
+.det__card {
+  padding: var(--s5);
+}
+.det__big {
+  display: flex;
+  align-items: center;
+  gap: var(--s6);
+  flex-wrap: wrap;
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid var(--border);
+}
+.det__num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.det__num-label {
+  margin-left: var(--s2);
+  color: var(--ink-muted);
+}
+.det__loc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.det__loc-val {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.det__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--s4);
+  margin: var(--s5) 0;
+}
+.det__grid dt {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  margin-bottom: 2px;
+}
+.det__grid dd {
+  font-weight: 500;
+}
+.det__wide {
+  grid-column: 1 / -1;
+}
+.det__updated {
+  font-size: 0.85rem;
+}

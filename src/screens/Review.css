@@ -1,0 +1,266 @@
+/* ============================================================
+   Review / Cleanup: calm, satisfying to-do list.
+   All classes prefixed rev- (global CSS, no modules).
+   --rev-tone is the group's accent, set inline per group.
+   ============================================================ */
+
+.rev-count {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+.rev-count strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--warn);
+  font-variant-numeric: tabular-nums;
+}
+
+.rev-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+
+/* ---- Group shell ---- */
+.rev-group {
+  overflow: hidden;
+  border-left: 4px solid var(--rev-tone, var(--border-strong));
+}
+
+.rev-group__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  width: 100%;
+  padding: var(--s4);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink);
+  font: inherit;
+}
+.rev-group__head:hover {
+  background: var(--surface-sunken);
+}
+
+.rev-group__chevron {
+  flex: 0 0 auto;
+  color: var(--rev-tone, var(--ink-muted));
+  font-size: 0.85rem;
+  width: 1em;
+}
+
+.rev-group__title {
+  flex: 1 1 auto;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.rev-group__count {
+  flex: 0 0 auto;
+  min-width: 28px;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--rev-tone, var(--ink-muted)) 14%, var(--surface));
+  color: var(--rev-tone, var(--ink-soft));
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.rev-group__body {
+  padding: 0 var(--s4) var(--s2);
+  border-top: 1px solid var(--border);
+}
+
+.rev-group__hint {
+  font-size: 0.85rem;
+  margin: var(--s3) 0 var(--s2);
+}
+
+/* ---- Rows ---- */
+.rev-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rev-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--border);
+}
+.rev-list .rev-row:last-child {
+  border-bottom: none;
+}
+
+.rev-row__main {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+  min-width: 0;
+}
+.rev-row__main--col {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.rev-row__title {
+  font-weight: 600;
+  flex: 1 1 auto;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.rev-row__qty {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.rev-row__qty--missing {
+  color: var(--warn);
+  font-style: italic;
+}
+
+.rev-row__notes {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.rev-row__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+}
+.rev-row__actions--qty,
+.rev-row__actions--loc {
+  align-items: stretch;
+}
+
+/* Compact action buttons sized for one-tap fixes (>=44px tall). */
+.rev-btn-sm {
+  min-height: 44px;
+  padding: 0 var(--s4);
+  font-size: 0.92rem;
+}
+
+.rev-input {
+  min-height: 44px;
+  flex: 1 1 140px;
+  min-width: 120px;
+  max-width: 220px;
+}
+
+/* ---- Duplicates ---- */
+.rev-row--dup {
+  background: color-mix(in srgb, #7c3aed 5%, transparent);
+  margin: 0 calc(-1 * var(--s4));
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--border);
+}
+
+.rev-dup-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+}
+
+.rev-dup-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s2);
+  padding: var(--s1) var(--s2);
+  border-radius: var(--r-input);
+}
+.rev-dup-item--keep {
+  background: color-mix(in srgb, var(--success) 10%, transparent);
+}
+
+.rev-dup-item__title {
+  font-weight: 600;
+}
+.rev-dup-item__meta {
+  font-size: 0.82rem;
+}
+.rev-dup-item__keep-tag {
+  color: var(--success);
+  font-weight: 600;
+}
+
+/* ---- Wider screens: lay row main + actions side by side ---- */
+@media (min-width: 640px) {
+  .rev-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .rev-row__main {
+    flex: 1 1 auto;
+  }
+  .rev-row__actions {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+  }
+  .rev-row--dup {
+    flex-direction: row;
+    align-items: center;
+  }
+  .rev-row--dup .rev-dup-items {
+    flex: 1 1 auto;
+  }
+}
+
+/* ===== Review bulk selection ===== */
+.rev-check {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  margin-right: var(--s1);
+  align-self: center;
+}
+.rev-selectall {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: var(--s2);
+  cursor: pointer;
+}
+.rev-selectall input {
+  width: 18px;
+  height: 18px;
+}
+.rev-bulkbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  margin-top: var(--s3);
+  padding: var(--s3);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-input);
+}
+.rev-bulkbar__count {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+.rev-bulkbar--wrap .rev-input {
+  flex: 1 1 130px;
+}

@@ -1,0 +1,1441 @@
+[
+  {
+    "id": "c5d9927d-b79d-4f34-b605-04dd7612ad04",
+    "title": "Life of Pi",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Yann Martel",
+    "isbn": "9780156027328",
+    "notes": "Mariner Books · 2003"
+  },
+  {
+    "id": "9265809b-f1a3-4292-a5c3-ece27372c157",
+    "title": "Life of Pi",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Yann Martel",
+    "isbn": "9780676973778",
+    "notes": "Vintage Canada · 2002"
+  },
+  {
+    "id": "4e3f31a9-8019-46b6-9061-a27de27f7490",
+    "title": "Foxfire: Confessions of a Girl Gang",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Joyce Carol Oates",
+    "isbn": "9780452272316",
+    "notes": "Plume · 1994"
+  },
+  {
+    "id": "29035891-5d3b-443b-995d-cfa5daad4a90",
+    "title": "Annie on My Mind",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Nancy Garden",
+    "isbn": "9780374400118",
+    "notes": "Square Fish · 2007 · 25th Anniversary Edition"
+  },
+  {
+    "id": "7fabb7f0-0723-49f9-874b-0438186a6807",
+    "title": "Born to Rock",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Gordon Korman",
+    "isbn": "9780786809219",
+    "notes": "Disney-Hyperion · 2008"
+  },
+  {
+    "id": "65ce0c1b-63f3-4f61-bf64-2c4036379c6d",
+    "title": "Lexicon",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Max Barry",
+    "isbn": "9780143125426",
+    "notes": "Penguin Books · 2014"
+  },
+  {
+    "id": "18ee8ebc-e09b-420c-880c-eb1d21befd19",
+    "title": "Acceleration",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Graham McNamee",
+    "isbn": "9780440238362",
+    "notes": "Laurel-Leaf Books · 2005 · Readers Circle Edition"
+  },
+  {
+    "id": "c76a61b0-77f4-4af3-91d6-610edbcd4313",
+    "title": "Scott Pilgrim's Finest Hour Vol. 6",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Bryan Lee O'Malley",
+    "isbn": "9781934964385",
+    "notes": "Oni Press · 2010"
+  },
+  {
+    "id": "805fb946-0c49-4f12-aaa1-ff67c61887f0",
+    "title": "Trapped",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Michael Northrop",
+    "isbn": "9780545210133",
+    "notes": "Scholastic · 2012"
+  },
+  {
+    "id": "58748c28-cfa2-4c6e-b2d4-dbef1e384b36",
+    "title": "Scott Pilgrim Gets It Together Vol. 4",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Bryan Lee O'Malley",
+    "isbn": "9781932664492",
+    "notes": "Oni Press · 2007"
+  },
+  {
+    "id": "10edf12a-2279-47e1-9bf8-710e40f71c00",
+    "title": "Snow Crash",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Neal Stephenson",
+    "isbn": "9780553380958",
+    "notes": "Del Rey · 2000"
+  },
+  {
+    "id": "ff6849d2-9250-4317-bb4a-742b681bbe32",
+    "title": "American Born Chinese",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Gene Luen Yang",
+    "isbn": "9780312384487",
+    "notes": "Square Fish · 2008"
+  },
+  {
+    "id": "ad9e143c-5b6c-42d0-8de1-cd035fc3659a",
+    "title": "Swim the Fly",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Don Calame",
+    "isbn": "9780763647766",
+    "notes": "Candlewick Press · 2010"
+  },
+  {
+    "id": "f2478c2a-5e39-450e-9465-a5f9edfd1f2f",
+    "title": "Scott Pilgrim Series",
+    "quantity": 0,
+    "category": "Other / Uncategorized",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Bryan Lee O'Malley",
+    "notes": "Spines photo only, representing multiple volumes in the series"
+  },
+  {
+    "id": "8722c08f-da2f-4202-912f-e1f532984a7f",
+    "title": "Macbeth",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780198324003",
+    "notes": "Oxford University Press · 2009"
+  },
+  {
+    "id": "3d682046-a611-42a6-9998-b9ced1ee2848",
+    "title": "Macbeth",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "notes": "Longman Canada · 1965 · Falcon Shakespeare"
+  },
+  {
+    "id": "01ff1644-7840-4282-b2e3-0bae4dd5178e",
+    "title": "Macbeth",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "notes": "Longman Canada · 1965 · Falcon Shakespeare"
+  },
+  {
+    "id": "475bb228-1308-4a3b-a790-5040c07255f0",
+    "title": "Macbeth: The Graphic Novel (Quick Text)",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780195437973",
+    "notes": "Oxford University Press · 2010"
+  },
+  {
+    "id": "0549c737-0516-4607-a14b-6f306618a09a",
+    "title": "Macbeth Online: Personal Playscript & Online Registration Code",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780195440089",
+    "notes": "Oxford University Press · 2011"
+  },
+  {
+    "id": "2f1df827-3d92-4b20-9bb4-04bc36a696bd",
+    "title": "Macbeth",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780743477109",
+    "notes": "Simon & Schuster · 2003 · Updated Edition"
+  },
+  {
+    "id": "a78db175-2245-4691-99ab-a164eec5f8c7",
+    "title": "Macbeth",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780774714808",
+    "notes": "Harcourt Canada · 2001 · Second Edition"
+  },
+  {
+    "id": "d230ee0b-cfe0-44eb-9288-89d75322fd28",
+    "title": "Button, Button: Uncanny Stories",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Richard Matheson",
+    "isbn": "9780765312570",
+    "notes": "Tor Books · 2008"
+  },
+  {
+    "id": "3a75f05c-5312-4165-b6bc-2e2c9dbd75ae",
+    "title": "The Unfinished",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Cheryl Isaacs",
+    "isbn": "9780063287389",
+    "notes": "Heartdrum · 2024"
+  },
+  {
+    "id": "24344d65-75f3-494f-8a1b-ef04a42723fc",
+    "title": "Brother",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "David Chariandy",
+    "isbn": "9780771023330",
+    "notes": "McClelland & Stewart · 2017"
+  },
+  {
+    "id": "4d153774-c1e5-4307-b66c-90fe1635ca92",
+    "title": "In Your Own Words 2",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Joan M. Green & Ian W. Mills",
+    "isbn": "9780039201685",
+    "notes": "Holt, Rinehart and Winston of Canada · 1982"
+  },
+  {
+    "id": "057e97c5-c736-4b0a-98ce-89c5d734b4ae",
+    "title": "The Kite Runner",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Khaled Hosseini",
+    "isbn": "9780385660075",
+    "notes": "Anchor Canada · 2004"
+  },
+  {
+    "id": "4b921c81-60d6-493f-bdd3-9b796cb05763",
+    "title": "The Kite Runner",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Khaled Hosseini",
+    "isbn": "9780385665209",
+    "notes": "Anchor Canada · 2007 · Movie Tie-In Edition"
+  },
+  {
+    "id": "a00b2db1-12f0-48bf-9b48-812b77a17f37",
+    "title": "Ray Bradbury's Something Wicked This Way Comes: The Authorized Adaptation",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Ray Bradbury",
+    "isbn": "9780809080441",
+    "notes": "Hill and Wang · 2011 · 1st Edition"
+  },
+  {
+    "id": "63212905-c7df-4408-85f6-d7a95047a10d",
+    "title": "Nelson English: Literature & Media 10",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Neil Andersen",
+    "isbn": "9780176187941",
+    "notes": "Nelson Thomson Learning · 2000 · Student Edition"
+  },
+  {
+    "id": "90e65875-7d6c-4b57-96cf-dad04708faa3",
+    "title": "Speed of Life",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "J. M. Kelly",
+    "isbn": "9780544747821",
+    "notes": "HMH Books for Young Readers · 2016 · Hardcover"
+  },
+  {
+    "id": "6a1c4ff2-7263-4fb8-a9ac-6447cdc07fb3",
+    "title": "Every Hidden Thing",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Kenneth Oppel",
+    "isbn": "9781443410304",
+    "notes": "HarperTrophy · 2017 · Paperback"
+  },
+  {
+    "id": "98409739-8e90-40fb-9568-47629c6244c7",
+    "title": "Creeps",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Darren Hynes",
+    "isbn": "9780143187141",
+    "notes": "Razorbill · 2013 · Trade Paperback"
+  },
+  {
+    "id": "b3e4963d-78fe-4424-9260-edfefe56b058",
+    "title": "The Landing",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "John Ibbitson",
+    "isbn": "9781554532384",
+    "notes": "Kids Can Press · 2008 · Paperback"
+  },
+  {
+    "id": "b960a3e0-3e83-4dbe-b252-6caa7b2f683a",
+    "title": "Synchro Boy",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Shannon McFerran",
+    "isbn": "9781551527444",
+    "notes": "Arsenal Pulp Press · 2018 · Paperback"
+  },
+  {
+    "id": "39960937-b141-40b6-bc4a-8170d716ae1f",
+    "title": "Subject to Change",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Karen Nesbitt",
+    "isbn": "9781459811461",
+    "notes": "Orca Book Publishers · 2017 · Paperback"
+  },
+  {
+    "id": "f9a3e8f9-5764-47c6-9a20-6518c85a7fc3",
+    "title": "Elements of English 10",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Douglas Hilker, Sue Harper",
+    "isbn": "9780774705943",
+    "notes": "Harcourt Canada · 2000 · Student Edition"
+  },
+  {
+    "id": "9aa3740f-5ef6-4a7c-ab87-af6371922761",
+    "title": "Elements of English 10 Teacher's Guide",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Douglas Hilker, Sue Harper",
+    "notes": "Cover photo only, unable to find matching Ontario edition ISBN"
+  },
+  {
+    "id": "8de7159c-61af-4f78-8232-0272185f7868",
+    "title": "Rosencrantz and Guildenstern Are Dead Individual Learning Packet / Teaching Unit",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Other",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Tom Stoppard",
+    "notes": "Prestwick House · Reorder No. 300965 · Binder/Teaching Unit"
+  },
+  {
+    "id": "477d96e0-06eb-4462-b629-e2aa4b37df33",
+    "title": "Inside Track 2",
+    "quantity": 0,
+    "category": "Grade 10",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Robin Pearson, Debbie J. Chambers",
+    "isbn": "9780195423181",
+    "notes": "Oxford University Press · 2005 · Student Book"
+  },
+  {
+    "id": "ca13bc1e-d1e3-4875-87eb-3c0f61c31f86",
+    "title": "The Hate U Give",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Angie Thomas",
+    "notes": "Spine photo only, unable to find matching edition"
+  },
+  {
+    "id": "e8408f78-db24-4398-8345-f86a381e0e0b",
+    "title": "Every Hidden Thing",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Kenneth Oppel",
+    "isbn": "9781443410304",
+    "notes": "HarperCollins · 2017"
+  },
+  {
+    "id": "72d12179-01af-4df7-b486-a9f042326abb",
+    "title": "The Opposite of Geek",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Ria Voros",
+    "isbn": "9781443104845",
+    "notes": "Scholastic Canada · 2013"
+  },
+  {
+    "id": "0a578836-afd4-4795-a3fc-0dc3139e7444",
+    "title": "Home Invasion",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Monique Polak",
+    "isbn": "9781551434827",
+    "notes": "Orca Book Publishers · 2005"
+  },
+  {
+    "id": "96c64565-e630-4cc6-b554-861ab7b83150",
+    "title": "Bad Girls of Fashion: Style Rebels from Cleopatra to Lady Gaga",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Jennifer Croll",
+    "isbn": "9781554517855",
+    "notes": "Annick Press · 2016"
+  },
+  {
+    "id": "87bbe061-27bf-4380-9a65-c129c4b9e026",
+    "title": "Skim",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Mariko Tamaki and Jillian Tamaki",
+    "isbn": "9780888999641",
+    "notes": "Groundwood Books · 2010"
+  },
+  {
+    "id": "ea606f3b-b80f-4805-81c3-f6ac47973d81",
+    "title": "Far and Wide: Essays from Canada",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Sean Armstrong",
+    "isbn": "9780176047054",
+    "notes": "Nelson Canada · 1995"
+  },
+  {
+    "id": "0b069a59-4915-4778-bafc-1c31804f928e",
+    "title": "Diary of a Wimpy Kid: The Ugly Truth",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Jeff Kinney",
+    "isbn": "9780810984912",
+    "notes": "Amulet Books · 2010"
+  },
+  {
+    "id": "2575dd9f-8f77-4793-8b6d-4f9de121f0c8",
+    "title": "Geography Club",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Brent Hartinger",
+    "isbn": "9780060012236",
+    "notes": "HarperTempest · 2004"
+  },
+  {
+    "id": "ff281154-2516-4c59-8de9-3be46374f609",
+    "title": "Mirror Game",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Dennis Foon",
+    "isbn": "9780921368243",
+    "notes": "Blizzard Publishing · 1992"
+  },
+  {
+    "id": "a3fbc930-d33f-4804-81a4-f37d925a3a7f",
+    "title": "Bayou: Volume One",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Jeremy Love",
+    "isbn": "9781401223823",
+    "notes": "DC Comics · 2009"
+  },
+  {
+    "id": "f5a8f3b3-f17a-408b-b9c8-b410ba11f4a0",
+    "title": "Coraline: The Graphic Novel",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Neil Gaiman",
+    "isbn": "9780060825454",
+    "notes": "HarperCollins · 2008"
+  },
+  {
+    "id": "474d08a7-b13f-44c0-8f2c-6cd43d5d362c",
+    "title": "This Book Is Anti-Racist",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Tiffany Jewell",
+    "isbn": "9780711245204",
+    "notes": "Frances Lincoln Children's Books · 2020"
+  },
+  {
+    "id": "973380f7-c788-4952-91cc-5710bbb0683f",
+    "title": "Breakout",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Brian Drader",
+    "isbn": "9780920486634",
+    "notes": "Scirocco Drama · 2004"
+  },
+  {
+    "id": "7ee45a38-af69-4b43-831a-46067c9187e2",
+    "title": "The Marrow Thieves",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Cherie Dimaline",
+    "isbn": "9781770864863",
+    "notes": "Dancing Cat Books · 2017"
+  },
+  {
+    "id": "42728f32-e05f-4847-8c2b-539e3c387931",
+    "title": "Romeo & Juliet @online",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780195440072",
+    "notes": "Oxford University Press · 2010"
+  },
+  {
+    "id": "e5f0f172-2316-48d7-be3d-bfa2f3cf9732",
+    "title": "Romeo and Juliet",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780774712699",
+    "notes": "Harcourt Canada · 1987 · Harbrace Shakespeare"
+  },
+  {
+    "id": "87353d6f-7663-4c4a-ac53-eade93725956",
+    "title": "Word Nerd",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Susin Nielsen",
+    "isbn": "9780887769900",
+    "notes": "Tundra Books · 2010"
+  },
+  {
+    "id": "d43dee74-42d4-4073-b92b-6ac69fe3b96e",
+    "title": "Romeo and Juliet: The Graphic Novel",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780810993259",
+    "notes": "Amulet Books · 2007"
+  },
+  {
+    "id": "9884dfbf-7433-492f-bf88-2b77c9cc6c3d",
+    "title": "Romeo and Juliet",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780743477116",
+    "notes": "Simon & Schuster · 2004 · Folger Shakespeare Library Updated Edition"
+  },
+  {
+    "id": "3f5a6c7e-13ee-4e2c-988d-90b73737c6f8",
+    "title": "Romeo and Juliet",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "William Shakespeare",
+    "isbn": "9780451526861",
+    "notes": "Signet Classics · 1998 · Newly Revised Edition"
+  },
+  {
+    "id": "e9358bc5-1636-48a4-975d-53df7f0055bf",
+    "title": "Alive: The Story of the Andes Survivors",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Piers Paul Read",
+    "isbn": "9780380003211",
+    "notes": "Avon Books · 2002"
+  },
+  {
+    "id": "5fc4daff-80a6-4f16-805e-17b133c3e3e1",
+    "title": "Charmed",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Carrie Mac",
+    "isbn": "9781551433219",
+    "notes": "Orca Book Publishers · 2004 · Orca Soundings"
+  },
+  {
+    "id": "dafe80b0-638d-4f6e-84c8-992beb3048a6",
+    "title": "No More Pranks",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Monique Polak",
+    "isbn": "9781551433158",
+    "notes": "Orca Book Publishers · 2004 · Orca Soundings"
+  },
+  {
+    "id": "2c998544-be04-4b8b-b61a-bb426352e731",
+    "title": "Button, Button: Uncanny Stories",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Richard Matheson",
+    "isbn": "9780765312570",
+    "notes": "Tor Books · 2008"
+  },
+  {
+    "id": "d77488c9-9a51-49c7-adb6-38b9f1f7d01c",
+    "title": "Theories of Relativity",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Barbara Haworth-Attard",
+    "isbn": "9780006392996",
+    "notes": "HarperTrophy Canada · 2003"
+  },
+  {
+    "id": "89e2f4a0-69fd-4460-959a-9398dd94a1e1",
+    "title": "A Winter's Tale",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Gail Sidonie Sobat",
+    "isbn": "9781894283434",
+    "notes": "Great Plains Publications · 2004"
+  },
+  {
+    "id": "5498e9cd-f55c-42a6-ab10-cdb153906661",
+    "title": "Dooley Takes the Fall",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Norah McClintock",
+    "isbn": "9780889954038",
+    "notes": "Red Deer Press · 2007"
+  },
+  {
+    "id": "952af73a-108b-4c24-ab1f-a8e74cb85f83",
+    "title": "First Crossing: Stories About Teen Immigrants",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Donald R. Gallo",
+    "isbn": "9780763632915",
+    "notes": "Candlewick Press · 2007"
+  },
+  {
+    "id": "b63d929a-5410-4e15-ae32-95f064058bea",
+    "title": "YU+ME: dream Volume 1",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Megan Rose Gedris",
+    "isbn": "9780979400704",
+    "notes": "Rosalarian · 2009"
+  },
+  {
+    "id": "47c1c177-8476-42c5-93ed-864bccdd6766",
+    "title": "Munro vs. the Coyote",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Darren Groth",
+    "isbn": "9781459814097",
+    "notes": "Orca Book Publishers · 2017"
+  },
+  {
+    "id": "b4ba0eec-0473-42f5-87d3-73ed5305db99",
+    "title": "Everything Beautiful Is Not Ruined",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Danielle Younge-Ullman",
+    "isbn": "9780143198215",
+    "notes": "Tundra Books · 2018"
+  },
+  {
+    "id": "a95398dd-c03f-45bb-bcbf-d5b2cd90d6ae",
+    "title": "Inside Track 1",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Robin Pearson & Debbie J. Chambers",
+    "isbn": "9780195423112",
+    "notes": "Oxford University Press · 2005"
+  },
+  {
+    "id": "1ac632e0-7bc9-4a53-8cbf-d5495d2a68ba",
+    "title": "Language & Writing 9",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Don Aker & David Hodgkinson",
+    "isbn": "9780176186814",
+    "notes": "Nelson · 2002 · Student Edition"
+  },
+  {
+    "id": "518aaf4b-89d7-4c50-b272-6ce41c300562",
+    "title": "Reading and Writing for Success",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Lynn Archer, Cathy Costello, Debbie Harvey",
+    "isbn": "9780774701976",
+    "notes": "Harcourt Canada · 1997"
+  },
+  {
+    "id": "6f4a6b6a-92f2-4180-b242-2602a0da20d8",
+    "title": "In Your Own Words 1",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "J. M. Green & I. W. Mills",
+    "isbn": "9780039219109",
+    "notes": "Holt, Rinehart & Winston · 1981 · Revised"
+  },
+  {
+    "id": "120196e9-c441-41e9-b7f4-30ae2d8ad7c1",
+    "title": "The Lightning Thief",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Rick Riordan",
+    "isbn": "9780786838653",
+    "notes": "Disney Hyperion · 2006"
+  },
+  {
+    "id": "e354256a-4289-4b13-a570-fedf34747afa",
+    "title": "Inside Stories I",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Glen Kirkland & Richard Davies",
+    "isbn": "9780774712712",
+    "notes": "Harcourt Brace Jovanovich, Canada · 1987"
+  },
+  {
+    "id": "5e6145c4-f003-4198-9b33-bb4995658390",
+    "title": "Skin & Liars",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Dennis Foon",
+    "isbn": "9780887544682",
+    "notes": "Playwrights Canada Press · 1988 · Eighth Printing"
+  },
+  {
+    "id": "dbb2f22e-ad1b-45e3-92ba-f19355d06121",
+    "title": "Inside Stories for Senior Students",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Glen Kirkland & Richard Davies",
+    "isbn": "9780774714082",
+    "notes": "Harcourt Brace Jovanovich, Canada · 1993"
+  },
+  {
+    "id": "93cc7d87-28c7-41a4-98f8-fdbf072486ad",
+    "title": "Literature & Media 9: Teacher's Guide",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Martha Di Leonardo",
+    "isbn": "9780176187026",
+    "notes": "ITP Nelson · 2000 · Teacher's Guide"
+  },
+  {
+    "id": "dab271f7-0549-488d-ac23-0a1b6ff1af56",
+    "title": "Romeo and Juliet",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "John Moore",
+    "isbn": "9781895165388",
+    "notes": "Tree House Press Inc. · Student Edition"
+  },
+  {
+    "id": "a97b4e89-7172-42b1-b739-22f1e8b32c3f",
+    "title": "Ultimate Spider-Man: Ultimate Collection, Vol. 3",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Brian Michael Bendis",
+    "isbn": "9780785149194",
+    "notes": "Marvel Comics · 2010"
+  },
+  {
+    "id": "fcef5210-2499-48ec-b7a1-5d9e580ed7a6",
+    "title": "English A: Literature Course Companion",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Hannah Tyson & Mark Beverley",
+    "isbn": "9780198390084",
+    "notes": "Oxford University Press · 2012"
+  },
+  {
+    "id": "82b35e89-9df4-41b9-b0cd-b3b2ef4d12a5",
+    "title": "Literature & Media 9",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Anthony Luengo",
+    "isbn": "9780176187019",
+    "notes": "Nelson Canada · 1999 · Student Edition"
+  },
+  {
+    "id": "4c9dd7e2-b0a2-4527-997d-f2ee326c9219",
+    "title": "Elements of English 9",
+    "quantity": 0,
+    "category": "Grade 9",
+    "materialType": "Book",
+    "location": {
+      "section": "",
+      "shelf": ""
+    },
+    "status": "Needs review",
+    "createdAt": "2026-06-17T23:00:30.560Z",
+    "updatedAt": "2026-06-17T23:00:30.560Z",
+    "author": "Douglas Hilker & Sue Harper",
+    "isbn": "9780774705752",
+    "notes": "Harcourt, Brace & Company, Canada · 1999"
+  }
+]

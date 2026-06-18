@@ -1,0 +1,179 @@
+/* Add / Edit Item: the speed-critical, thumb-first entry screen.
+   All classes prefixed `form-` (global, not modules). */
+
+.form-head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+.form-close {
+  flex: 0 0 auto;
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.form-head h1 {
+  margin: 0;
+}
+
+.form-notfound {
+  margin-top: var(--s3);
+}
+
+/* Each top-level field block */
+.form-field {
+  margin-bottom: var(--s5);
+}
+
+.form-sublabel {
+  display: block;
+  font-weight: 600;
+  font-size: 0.82rem;
+  margin-bottom: var(--s1);
+  color: var(--ink-soft);
+}
+
+/* Inline duplicate hint */
+.form-duphint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s2);
+  margin-top: var(--s2);
+  padding: var(--s2) var(--s3);
+  background: var(--warn-tint);
+  border: 1px solid color-mix(in srgb, var(--warn) 28%, transparent);
+  border-radius: var(--r-input);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+.form-duphint__icon {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+/* Location fields */
+.form-loc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+.form-loc__row {
+  display: flex;
+  gap: var(--s3);
+}
+.form-loc__shelf {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Collapsible "More details" */
+.form-collapse-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--s2) 0;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  text-align: left;
+}
+.form-collapse-caret {
+  display: inline-flex;
+  width: 1em;
+  color: var(--ink-muted);
+}
+.form-more {
+  margin-top: var(--s3);
+  padding: var(--s4);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--r-input);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+}
+.form-subfield {
+  margin: 0;
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 88px;
+  line-height: 1.5;
+}
+
+/* Actions: sticky at the bottom for one-thumb saving */
+.form-actions {
+  position: sticky;
+  bottom: calc(var(--bottombar-h) + var(--s2));
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  margin-top: var(--s5);
+  padding: var(--s3);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-float);
+}
+
+.form-actions .btn {
+  min-height: 50px;
+  font-size: 1rem;
+}
+
+/* Saved toast */
+.form-toast {
+  align-self: center;
+  padding: var(--s1) var(--s4);
+  background: var(--primary-tint);
+  color: var(--success);
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* Delete confirm */
+.form-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s3);
+  background: var(--danger-tint);
+  border-radius: var(--r-input);
+}
+.form-confirm__msg {
+  font-weight: 600;
+  color: var(--danger);
+}
+.form-confirm__btns {
+  display: flex;
+  gap: var(--s2);
+}
+.form-confirm__btns .btn {
+  flex: 1 1 0;
+}
+
+@media (min-width: 860px) {
+  .form-actions {
+    bottom: var(--s4);
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+  }
+  .form-actions .btn--block {
+    width: auto;
+    min-width: 200px;
+  }
+  .form-actions .form-toast {
+    margin-right: auto;
+    align-self: center;
+  }
+}

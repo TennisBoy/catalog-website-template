@@ -1,0 +1,223 @@
+/* ============================================================
+   Dashboard: warm "card catalog" overview.
+   All classes prefixed dash- (global CSS, no modules).
+   ============================================================ */
+
+.dash-h2 {
+  margin-bottom: var(--s4);
+}
+
+/* ---- Stat cards ---- */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s3);
+}
+
+.dash-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+  padding: var(--s4);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.dash-stat__num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 1.4rem + 2.4vw, 2.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.dash-stat__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted);
+}
+
+.dash-stat--link {
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+}
+.dash-stat--link:hover {
+  text-decoration: none;
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-float);
+}
+.dash-stat--link:active {
+  transform: translateY(1px);
+}
+
+.dash-stat--warn {
+  background: var(--warn-tint);
+  border-color: color-mix(in srgb, var(--warn) 32%, var(--border));
+}
+.dash-stat--warn .dash-stat__num,
+.dash-stat--warn .dash-stat__label {
+  color: var(--warn);
+}
+
+/* ---- Quick actions ---- */
+.dash-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s3);
+}
+
+.dash-action {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s4);
+  min-height: 64px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+}
+.dash-action:hover {
+  text-decoration: none;
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-float);
+}
+.dash-action:active {
+  transform: translateY(1px);
+}
+
+.dash-action__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: var(--r-input);
+  background: var(--primary-tint);
+  font-size: 1.25rem;
+}
+
+.dash-action__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.dash-action__label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.dash-action__hint {
+  font-size: 0.82rem;
+}
+
+/* ---- Two-column body (category + recent) ---- */
+.dash-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s5);
+}
+
+/* ---- By category list ---- */
+.dash-cat-list,
+.dash-recent {
+  overflow: hidden;
+}
+
+.dash-cat-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.12s;
+}
+.dash-cat-list li:last-child .dash-cat-row {
+  border-bottom: none;
+}
+.dash-cat-row:hover {
+  text-decoration: none;
+  background: var(--surface-sunken);
+}
+
+.dash-cat-rule {
+  flex: 1 1 auto;
+  height: 0;
+  border-bottom: 1px dotted var(--border-strong);
+  align-self: center;
+  min-width: var(--s4);
+}
+
+.dash-cat-count {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Recently added ---- */
+.dash-recent-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s3) var(--s4);
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.12s;
+}
+.dash-recent li:last-child .dash-recent-row {
+  border-bottom: none;
+}
+.dash-recent-row:hover {
+  text-decoration: none;
+  background: var(--surface-sunken);
+}
+
+.dash-recent-main {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+}
+.dash-recent-title {
+  font-weight: 600;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dash-recent-qty {
+  font-family: var(--font-display);
+  font-weight: 600;
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+.dash-recent-meta {
+  font-size: 0.82rem;
+}
+
+/* ---- Responsive ---- */
+@media (min-width: 560px) {
+  .dash-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .dash-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .dash-actions {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .dash-cols {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}

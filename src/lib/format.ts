@@ -13,7 +13,7 @@ export function copyCount(items: Item[]): number {
 /** Compact relative time, e.g. "2m", "3h", "5d", "Jun 4". */
 export function relativeTime(iso: string, now = Date.now()): string {
   const then = new Date(iso).getTime()
-  if (!Number.isFinite(then)) return ''
+  if (!Number.isFinite(then)) return 'unknown'
   const sec = Math.max(0, Math.round((now - then) / 1000))
   if (sec < 45) return 'just now'
   const min = Math.round(sec / 60)

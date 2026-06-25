@@ -1,5 +1,4 @@
 import type { Category, MaterialType } from '../types'
-import { CATEGORIES } from '../types'
 
 export interface CategoryMeta {
   /** Full accent color (text/border on badges, color band on labels). */
@@ -26,14 +25,6 @@ export const CATEGORY_META: Record<Category, CategoryMeta> = {
   'Board Games': { color: '#16A34A', short: 'Games', section: 'Games area', defaultType: 'Board Game' },
   Films: { color: '#DC2626', short: 'Film', section: 'Media', defaultType: 'Film' },
   'Book Club': { color: '#A21CAF', short: 'Club', section: 'Book Club area', defaultType: 'Book' },
+  NBE: { color: '#92400E', short: 'NBE', section: 'Room 1', defaultType: 'Book' },
   'Other / Uncategorized': { color: '#64748B', short: 'Other', section: '', defaultType: 'Other' },
 }
-
-export const GRADE_CATEGORIES: Category[] = ['Grade 9', 'Grade 10', 'Grade 11', 'Grade 12']
-
-export function categoryColor(category: Category): string {
-  return CATEGORY_META[category].color
-}
-
-/** All categories, in canonical order. */
-export const ALL_CATEGORIES = CATEGORIES

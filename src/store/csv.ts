@@ -88,8 +88,12 @@ function coerceCategory(v: string): { category: Category; flagged: boolean } {
   return found ? { category: found, flagged: false } : { category: UNCATEGORIZED, flagged: true }
 }
 
-function coerceType(v: string): MaterialType {
-  return MATERIAL_TYPES.find((t) => t.toLowerCase() === v.trim().toLowerCase()) ?? 'Other'
+function coerceType(v: string): { materialType: MaterialType; flagged: boolean } {
+  const found = MATERIAL_TYPES.find((t) => t.toLowerCase() === v.trim().toLowerCase())
+  // A blank cell is fine (defaults to Other, not a typo); a non-blank no-match is flagged.
+  return found
+    ? { materialType: found, flagged: false }
+    : { materialType: 'Other', flagged: v.trim() !== '' }
 }
 
 function coerceCondition(v: string): Condition | undefined {
@@ -142,14 +146,28 @@ export function csvToDrafts(text: string): ImportResult {
       skipped++
       continue
     }
-    const { category, flagged } = coerceCategory(cellAt(r, col.category))
+    const { category, flagged: catFlagged } = coerceCategory(cellAt(r, col.category))
+    const { materialType, flagged: typeFlagged } = coerceType(cellAt(r, col.materialType))
+    // Quantity: blank defaults to 1; a non-numeric/negative value becomes 0 and
+    // flags the row for review rather than silently importing a wrong count.
+    const qtyCell = cellAt(r, col.quantity)
+    let quantity = 1
+    let qtyFlagged = false
+    if (qtyCell !== '') {
+      const n = Number(qtyCell)
+      if (Number.isFinite(n) && n >= 0) quantity = Math.round(n)
+      else {
+        quantity = 0
+        qtyFlagged = true
+      }
+    }
+    const flagged = catFlagged || typeFlagged || qtyFlagged
     if (flagged) flaggedCount++
-    const qtyRaw = Number(cellAt(r, col.quantity))
     drafts.push({
       title,
-      quantity: Number.isFinite(qtyRaw) && qtyRaw >= 0 ? qtyRaw : 0,
+      quantity,
       category,
-      materialType: coerceType(cellAt(r, col.materialType)),
+      materialType,
       location: {
         section: cellAt(r, col.section),
         shelf: cellAt(r, col.shelf),

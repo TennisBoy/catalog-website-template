@@ -1,5 +1,21 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import type { Item, ItemDraft, Category, MaterialType, Condition, Status } from '../types'
+import { CATEGORIES, MATERIAL_TYPES, CONDITIONS, STATUSES, UNCATEGORIZED } from '../types'
+
+// Validate enum-typed columns coming from the DB so a stray/legacy value can't
+// slip through `as` casts and make an item invisible to category/status filters.
+function asCategory(v: string): Category {
+  return (CATEGORIES as readonly string[]).includes(v) ? (v as Category) : UNCATEGORIZED
+}
+function asType(v: string): MaterialType {
+  return (MATERIAL_TYPES as readonly string[]).includes(v) ? (v as MaterialType) : 'Other'
+}
+function asStatus(v: string): Status {
+  return (STATUSES as readonly string[]).includes(v) ? (v as Status) : 'Needs review'
+}
+function asCondition(v: string | null): Condition | undefined {
+  return v && (CONDITIONS as readonly string[]).includes(v) ? (v as Condition) : undefined
+}
 
 export interface AppConfig {
   supabaseUrl: string
@@ -20,6 +36,8 @@ interface ItemRow {
   notes: string | null
   condition: string | null
   status: string
+  shelf_dismissed?: boolean | null
+  dup_dismissed?: boolean | null
   created_at: string
   updated_at: string
 }
@@ -54,14 +72,16 @@ export function rowToItem(r: ItemRow): Item {
     id: r.id,
     title: r.title,
     quantity: r.quantity,
-    category: r.category as Category,
-    materialType: r.material_type as MaterialType,
+    category: asCategory(r.category),
+    materialType: asType(r.material_type),
     location: { section: r.section ?? '', shelf: r.shelf ?? '' },
     author: r.author ?? undefined,
     isbn: r.isbn ?? undefined,
     notes: r.notes ?? undefined,
-    condition: (r.condition as Condition) ?? undefined,
-    status: r.status as Status,
+    condition: asCondition(r.condition),
+    status: asStatus(r.status),
+    shelfDismissed: r.shelf_dismissed === true,
+    dupDismissed: r.dup_dismissed === true,
     createdAt: r.created_at,
     updatedAt: r.updated_at,
   }
@@ -83,6 +103,8 @@ export function patchToRow(p: Partial<ItemDraft>): Record<string, unknown> {
   if (p.notes !== undefined) row.notes = p.notes ?? null
   if (p.condition !== undefined) row.condition = p.condition ?? null
   if (p.status !== undefined) row.status = p.status
+  if (p.shelfDismissed !== undefined) row.shelf_dismissed = p.shelfDismissed
+  if (p.dupDismissed !== undefined) row.dup_dismissed = p.dupDismissed
   return row
 }
 

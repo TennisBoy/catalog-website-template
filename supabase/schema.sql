@@ -40,19 +40,37 @@ create policy "Authenticated can delete items"
 -- 3) Live updates: let viewers' pages refresh automatically when data changes
 alter publication supabase_realtime add table public.items;
 
--- 4) Prevent duplicate editions.
--- One row per edition: if an ISBN is present, the ISBN must be unique; when
--- there's no ISBN, the (title + author + notes) combination must be unique.
--- Different editions of the same title (different ISBN/publisher) are still
--- allowed. Run this AFTER removing any existing exact duplicates.
+-- 4) Prevent duplicate editions (OPTIONAL — see note).
+-- One row per edition: if an ISBN is present, the normalized ISBN must be unique;
+-- when there's no ISBN, the (title + author + notes) combination must be unique.
+-- The ISBN is normalized to digits + x (matching the app's editionKey in
+-- src/lib/dedupe.ts), so "978-0-19..." and "9780019..." count as one edition.
+-- Different editions of the same title (different ISBN/publisher) are still allowed.
+--
+-- NOTE: this index is intentionally NOT applied on the current live database,
+-- because the catalog deliberately keeps two same-ISBN printings as separate rows
+-- (dismissed via dup_dismissed). Creating the index would reject that pair. Run it
+-- only on a database that has no intended same-edition duplicates.
 create unique index if not exists items_edition_uniq
   on public.items (
     (
       coalesce(
-        nullif(btrim(isbn), ''),
+        nullif(regexp_replace(lower(btrim(isbn)), '[^0-9x]', '', 'g'), ''),
         lower(btrim(title)) || '|' ||
         lower(btrim(coalesce(author, ''))) || '|' ||
         lower(btrim(coalesce(notes, '')))
       )
     )
   );
+
+-- 5) "No shelf needed" flag.
+-- Lets the head dismiss a shelfless item from the Review "No shelf/location"
+-- list (Save without a shelf). Safe to run on an existing table.
+alter table public.items
+  add column if not exists shelf_dismissed boolean not null default false;
+
+-- 6) "Not a duplicate" flag.
+-- Lets the head dismiss an edition from the Review "Possible duplicates" list
+-- ("Keep both") so the warning stays cleared. Safe to run on an existing table.
+alter table public.items
+  add column if not exists dup_dismissed boolean not null default false;

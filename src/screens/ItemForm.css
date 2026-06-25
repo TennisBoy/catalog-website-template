@@ -22,6 +22,20 @@
   margin-top: var(--s3);
 }
 
+/* Visual section groups (Basics / Location / Details) */
+.form-section + .form-section {
+  padding-top: var(--s4);
+  border-top: 1px solid var(--border);
+}
+.form-section-heading {
+  margin: 0 0 var(--s3) 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
 /* Each top-level field block */
 .form-field {
   margin-bottom: var(--s5);
@@ -33,6 +47,15 @@
   font-size: 0.82rem;
   margin-bottom: var(--s1);
   color: var(--ink-soft);
+}
+
+/* Small helper/hint text below inputs */
+.form-field-hint {
+  display: block;
+  margin-top: var(--s1);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
 }
 
 /* Inline duplicate hint */
@@ -176,4 +199,10 @@
     margin-right: auto;
     align-self: center;
   }
+}
+
+/* Section field rendered pure white, per request (stands out from the warm
+   --surface cream of the other inputs). */
+#f-section {
+  background: #fff;
 }

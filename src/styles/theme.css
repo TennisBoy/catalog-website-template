@@ -35,6 +35,9 @@
   --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --font-body: 'Hanken Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
+  /* Identity accent: the 3px library-green top stripe on the sidebar brand */
+  --brand-stripe: 3px solid var(--primary);
+
   /* Spacing scale */
   --s1: 4px;
   --s2: 8px;

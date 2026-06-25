@@ -1,9 +1,9 @@
 import type { Category, Status } from '../types'
-import { categoryColor } from '../data/categories'
+import { getCategoryColor } from '../lib/categoryColor'
 
 /** Color-coded category pill. Color is always paired with the text label. */
 export function CategoryBadge({ category, dot = true }: { category: Category; dot?: boolean }) {
-  const color = categoryColor(category)
+  const color = getCategoryColor(category)
   return (
     <span
       className="pill"

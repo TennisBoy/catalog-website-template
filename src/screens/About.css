@@ -1,0 +1,5 @@
+.about__lead { font-size: 1.05rem; margin-bottom: var(--s4, 16px); }
+.about__section { margin-top: var(--s5, 24px); }
+.about__section h2 { font-size: 1.1rem; margin-bottom: var(--s2, 8px); }
+.about__list { display: grid; gap: var(--s2, 8px); padding-left: 1.1rem; }
+.about__credit { margin-top: var(--s6, 32px); }

@@ -21,9 +21,21 @@ function now(): string {
   return new Date().toISOString()
 }
 
+let idCounter = 0
 function newId(): string {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) return crypto.randomUUID()
-  return 'id-' + Math.random().toString(36).slice(2) + Date.now().toString(36)
+  idCounter += 1
+  return 'id-' + Date.now().toString(36) + '-' + (idCounter).toString(36) + Math.random().toString(36).slice(2)
+}
+
+/** Drop keys whose value is undefined so a partial patch never overwrites
+ *  existing fields with undefined. */
+export function stripUndefined<T extends object>(obj: T): Partial<T> {
+  const out: Partial<T> = {}
+  for (const k in obj) {
+    if (obj[k] !== undefined) out[k] = obj[k]
+  }
+  return out
 }
 
 export type LoadStatus = 'loading' | 'ready'
@@ -51,7 +63,8 @@ export interface CatalogApi {
   bulkRemove: (ids: string[]) => void
   importItems: (drafts: ItemDraft[]) => void
   replaceAll: (items: Item[]) => void
-  mergeDuplicate: (keepId: string, dropId: string) => void
+  /** Fold one or more duplicate rows into the kept row, summing their copies. */
+  mergeMany: (keepId: string, dropIds: string[]) => void
   resetToSample: () => void
   clearAll: () => void
 }
@@ -81,7 +94,13 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
         setNotice('Could not load the catalog: ' + error.message)
         return
       }
-      setItems((data ?? []).map(rowToItem))
+      // Preserve optimistic rows still being inserted (temp- ids) so a realtime
+      // refetch landing mid-insert can't make a just-added item flicker away.
+      setItems((prev) => {
+        const fetched = (data ?? []).map(rowToItem)
+        const pending = prev.filter((it) => it.id.startsWith('temp-'))
+        return pending.length ? [...pending, ...fetched] : fetched
+      })
     } catch {
       setNotice('Could not reach the catalog database. Check the connection settings.')
     }
@@ -95,7 +114,7 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
 
     async function boot() {
       setStatus('loading')
-      const cfg: AppConfig = await fetch('./config.json', { cache: 'no-store' })
+      const cfg: AppConfig = await fetch('/config.json', { cache: 'no-store' })
         .then((r) => (r.ok ? r.json() : null))
         .then((j) => ({
           supabaseUrl: String(j?.supabaseUrl ?? ''),
@@ -111,7 +130,7 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
         // reconciled against any in-browser edits cached in localStorage.
         cloudRef.current = false
         setCloud(false)
-        const fileText = await fetch('./catalog.json', { cache: 'no-store' })
+        const fileText = await fetch('/catalog.json', { cache: 'no-store' })
           .then((r) => (r.ok ? r.text() : null))
           .catch(() => null)
         const cached = parseSnapshot(localStorage.getItem(STORAGE_KEY))
@@ -218,11 +237,12 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const updateItem = useCallback((id: string, patch: Partial<ItemDraft>) => {
-    setItems((prev) => prev.map((it) => (it.id === id ? { ...it, ...patch, updatedAt: now() } : it)))
+    const clean = stripUndefined(patch)
+    setItems((prev) => prev.map((it) => (it.id === id ? { ...it, ...clean, updatedAt: now() } : it)))
     if (cloudRef.current) {
       const sb = getSupabase()!
       void (async () => {
-        const { error } = await sb.from(TABLE).update(patchToRow(patch)).eq('id', id)
+        const { error } = await sb.from(TABLE).update(patchToRow(clean)).eq('id', id)
         if (error) setNotice('Could not save changes: ' + error.message)
       })()
     }
@@ -241,14 +261,15 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
 
   const bulkUpdate = useCallback((ids: string[], patch: Partial<ItemDraft>) => {
     if (ids.length === 0) return
+    const clean = stripUndefined(patch)
     const idSet = new Set(ids)
     setItems((prev) =>
-      prev.map((it) => (idSet.has(it.id) ? { ...it, ...patch, updatedAt: now() } : it)),
+      prev.map((it) => (idSet.has(it.id) ? { ...it, ...clean, updatedAt: now() } : it)),
     )
     if (cloudRef.current) {
       const sb = getSupabase()!
       void (async () => {
-        const { error } = await sb.from(TABLE).update(patchToRow(patch)).in('id', ids)
+        const { error } = await sb.from(TABLE).update(patchToRow(clean)).in('id', ids)
         if (error) setNotice('Could not update the selected items: ' + error.message)
       })()
     }
@@ -283,22 +304,33 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
 
   const replaceAll = useCallback((next: Item[]) => setItems(next), [])
 
-  const mergeDuplicate = useCallback((keepId: string, dropId: string) => {
+  const mergeMany = useCallback((keepId: string, dropIds: string[]) => {
+    const dropSet = new Set(dropIds.filter((id) => id !== keepId))
+    if (dropSet.size === 0) return
+    let merged = false
     let mergedQty = 0
+    // One updater sums ALL drops at once, so merging 3+ rows can't double-count
+    // from stale reads the way per-pair merges did.
     setItems((prev) => {
-      const drop = prev.find((it) => it.id === dropId)
       const keep = prev.find((it) => it.id === keepId)
-      if (!drop || !keep) return prev
-      mergedQty = keep.quantity + drop.quantity
+      const drops = prev.filter((it) => dropSet.has(it.id))
+      if (!keep || drops.length === 0) return prev
+      merged = true
+      mergedQty = keep.quantity + drops.reduce((s, it) => s + it.quantity, 0)
       return prev
         .map((it) => (it.id === keepId ? { ...it, quantity: mergedQty, updatedAt: now() } : it))
-        .filter((it) => it.id !== dropId)
+        .filter((it) => !dropSet.has(it.id))
     })
-    if (cloudRef.current && mergedQty) {
+    if (cloudRef.current && merged) {
       const sb = getSupabase()!
       void (async () => {
-        await sb.from(TABLE).update({ quantity: mergedQty, updated_at: now() }).eq('id', keepId)
-        await sb.from(TABLE).delete().eq('id', dropId)
+        const { error: upErr } = await sb
+          .from(TABLE)
+          .update({ quantity: mergedQty, updated_at: now() })
+          .eq('id', keepId)
+        if (upErr) { setNotice('Could not merge: ' + upErr.message); return }
+        const { error: delErr } = await sb.from(TABLE).delete().in('id', [...dropSet])
+        if (delErr) setNotice('Could not merge: ' + delErr.message)
       })()
     }
   }, [])
@@ -345,11 +377,11 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
       bulkRemove,
       importItems,
       replaceAll,
-      mergeDuplicate,
+      mergeMany,
       resetToSample,
       clearAll,
     }),
-    [items, readOnly, cloud, userEmail, status, notice, signIn, signOut, reload, getItem, addItem, updateItem, removeItem, bulkUpdate, bulkRemove, importItems, replaceAll, mergeDuplicate, resetToSample, clearAll],
+    [items, readOnly, cloud, userEmail, status, notice, signIn, signOut, reload, getItem, addItem, updateItem, removeItem, bulkUpdate, bulkRemove, importItems, replaceAll, mergeMany, resetToSample, clearAll],
   )
 
   return <CatalogContext.Provider value={api}>{children}</CatalogContext.Provider>

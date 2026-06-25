@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useCatalog } from '../store/useCatalog'
 import { reviewBuckets, attentionCount } from '../store/selectors'
 import { SignIn } from './SignIn'
+import { AddItemPanel } from './AddItemPanel'
+import { AddPanelContext } from './addPanelContext'
+import { TopSearch } from './TopSearch'
 
 interface NavItem {
   to: string
@@ -13,17 +16,25 @@ interface NavItem {
 
 export function Layout() {
   const { items, readOnly, cloud, userEmail, status, notice, signOut } = useCatalog()
-  const navigate = useNavigate()
+  const location = useLocation()
+  // The Catalog page has its own search + Add button, so the global top bar is
+  // redundant there, so hide it on /catalog.
+  const showTopbar = location.pathname !== '/catalog'
   const [moreOpen, setMoreOpen] = useState(false)
-  const [search, setSearch] = useState('')
   const [signInOpen, setSignInOpen] = useState(false)
   const [noticeDismissed, setNoticeDismissed] = useState(false)
+  // The "Add item" overlay opens in place over whatever page you're on (no nav).
+  const [addOpen, setAddOpen] = useState(false)
+  const openAdd = () => {
+    if (!readOnly) setAddOpen(true)
+  }
 
   const attention = readOnly ? 0 : attentionCount(reviewBuckets(items))
 
   // Nav adapts to whether the viewer can edit.
   const primaryNav: NavItem[] = [
     { to: '/', label: 'Dashboard', icon: '◇', end: true },
+    { to: '/about', label: 'About', icon: 'ℹ' },
     { to: '/catalog', label: 'Catalog', icon: '▤' },
     { to: '/shelves', label: 'Shelves', icon: '▥' },
   ]
@@ -35,16 +46,10 @@ export function Layout() {
     : [
         { to: '/labels', label: 'Labels', icon: '🏷' },
         { to: '/review', label: 'Review', icon: '✦' },
+        { to: '/lost', label: 'Lost item', icon: '⌕' },
         { to: '/export', label: 'Export', icon: '⬇' },
       ]
-  const sideNav: NavItem[] = readOnly
-    ? [...primaryNav, ...moreNav]
-    : [...primaryNav, { to: '/add', label: 'Add Item', icon: '＋' }, ...moreNav]
-
-  const submitSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    navigate('/catalog' + (search.trim() ? `?q=${encodeURIComponent(search.trim())}` : ''))
-  }
+  const sideNav: NavItem[] = [...primaryNav, ...moreNav]
 
   if (status === 'loading') {
     return (
@@ -78,6 +83,7 @@ export function Layout() {
   )
 
   return (
+    <AddPanelContext.Provider value={openAdd}>
     <div className="shell">
       {/* ---- Desktop sidebar ---- */}
       <aside className="sidebar">
@@ -102,36 +108,27 @@ export function Layout() {
           ))}
         </nav>
         <div className="sidebar__foot">
-          <div className="credit">
-            <span className="credit__name">Made by William Yin</span>
-            <span className="credit__class">Class of 2027</span>
-            <a className="credit__email" href="mailto:william.xhyin@gmail.com">
-              william.xhyin@gmail.com
-            </a>
-          </div>
+          {!readOnly && (
+            <p className="export-tip">
+              Export regularly. Even if a student gets the login, an exported copy keeps your data safe.
+            </p>
+          )}
           {accountBlock}
         </div>
       </aside>
 
       {/* ---- Main column ---- */}
       <div className="main">
-        <header className="topbar">
-          <form className="topbar__search" onSubmit={submitSearch} role="search">
-            <span aria-hidden>🔍</span>
-            <input
-              type="search"
-              placeholder="Search the catalog…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              aria-label="Search the catalog"
-            />
-          </form>
-          {!readOnly && (
-            <NavLink to="/add" className="btn btn--primary topbar__add">
-              ＋ Add item
-            </NavLink>
-          )}
-        </header>
+        {showTopbar && (
+          <header className="topbar">
+            <TopSearch />
+            {!readOnly && (
+              <button type="button" className="btn btn--primary topbar__add" onClick={openAdd}>
+                ＋ Add item
+              </button>
+            )}
+          </header>
+        )}
 
         {notice && !noticeDismissed && (
           <div className="notice" role="status">
@@ -149,9 +146,9 @@ export function Layout() {
 
       {/* ---- Mobile FAB (editing only) ---- */}
       {!readOnly && (
-        <NavLink to="/add" className="fab" aria-label="Add item">
+        <button type="button" className="fab" aria-label="Add item" onClick={openAdd}>
           ＋
-        </NavLink>
+        </button>
       )}
 
       {/* ---- Mobile bottom bar ---- */}
@@ -186,13 +183,11 @@ export function Layout() {
                 {n.to === '/review' && attention > 0 && <span className="badge">{attention}</span>}
               </NavLink>
             ))}
-            <div className="credit credit--sheet">
-              <span className="credit__name">Made by William Yin</span>
-              <span className="credit__class">Class of 2027</span>
-              <a className="credit__email" href="mailto:william.xhyin@gmail.com">
-                william.xhyin@gmail.com
-              </a>
-            </div>
+            {!readOnly && (
+              <p className="export-tip">
+                Export regularly. Even if a student gets the login, an exported copy keeps your data safe.
+              </p>
+            )}
             {cloud && (
               <button
                 type="button"
@@ -212,6 +207,9 @@ export function Layout() {
       )}
 
       {signInOpen && <SignIn onClose={() => setSignInOpen(false)} />}
+
+      {!readOnly && addOpen && <AddItemPanel onClose={() => setAddOpen(false)} />}
     </div>
+    </AddPanelContext.Provider>
   )
 }

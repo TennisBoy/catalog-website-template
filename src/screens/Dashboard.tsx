@@ -3,13 +3,13 @@ import { useCatalog } from '../store/useCatalog'
 import { UNCATEGORIZED } from '../types'
 import { countsByCategory } from '../store/selectors'
 import { titleCount, copyCount, relativeTime } from '../lib/format'
-import { categoryColor } from '../data/categories'
+import { getCategoryColor } from '../lib/categoryColor'
 import { CategoryBadge } from '../components/badges'
 import { EmptyState } from '../components/EmptyState'
+import { useAddPanel } from '../components/addPanelContext'
 import './Dashboard.css'
 
 const QUICK_ACTIONS = [
-  { to: '/add', icon: '➕', label: 'Add item', hint: 'Catalog a new title' },
   { to: '/catalog', icon: '🔍', label: 'Search catalog', hint: 'Find anything fast' },
   { to: '/labels', icon: '🏷️', label: 'Print labels', hint: 'Shelf & category labels' },
   { to: '/export', icon: '⬇️', label: 'Export catalog', hint: 'CSV for the records' },
@@ -19,9 +19,7 @@ const uncatLink = `/catalog?cat=${encodeURIComponent(UNCATEGORIZED)}`
 
 export function Dashboard() {
   const { items, readOnly } = useCatalog()
-
-  // Hide the "Add item" shortcut for read-only visitors.
-  const quickActions = readOnly ? QUICK_ACTIONS.filter((a) => a.to !== '/add') : QUICK_ACTIONS
+  const openAdd = useAddPanel()
 
   const titles = titleCount(items)
   const copies = copyCount(items)
@@ -49,7 +47,7 @@ export function Dashboard() {
               : "Add your first title to start cataloging the department's shelves."
           }
           actionLabel={readOnly ? undefined : 'Add the first item'}
-          actionTo={readOnly ? undefined : '/add'}
+          onAction={readOnly ? undefined : openAdd}
         />
       </div>
     )
@@ -60,7 +58,6 @@ export function Dashboard() {
       <header className="page__head">
         <p className="eyebrow">English Department</p>
         <h1>Dashboard</h1>
-        <p className="muted">A quick look at the catalog, and the four things you do most.</p>
       </header>
 
       {/* Stat cards */}
@@ -92,7 +89,18 @@ export function Dashboard() {
       <section className="section-gap" aria-label="Quick actions">
         <h2 className="dash-h2">Quick actions</h2>
         <div className="dash-actions">
-          {quickActions.map((a) => (
+          {!readOnly && (
+            <button type="button" className="dash-action card" onClick={openAdd}>
+              <span className="dash-action__icon" aria-hidden>
+                ➕
+              </span>
+              <span className="dash-action__text">
+                <span className="dash-action__label">Add item</span>
+                <span className="dash-action__hint muted">Catalog a new title</span>
+              </span>
+            </button>
+          )}
+          {QUICK_ACTIONS.map((a) => (
             <Link key={a.to} to={a.to} className="dash-action card">
               <span className="dash-action__icon" aria-hidden>
                 {a.icon}
@@ -137,7 +145,7 @@ export function Dashboard() {
                     <span className="dash-recent-title">{it.title}</span>
                     <span
                       className="dash-recent-qty"
-                      style={{ color: categoryColor(it.category) }}
+                      style={{ color: getCategoryColor(it.category) }}
                     >
                       ×{it.quantity}
                     </span>

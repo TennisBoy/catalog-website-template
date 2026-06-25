@@ -3,6 +3,66 @@
    Mobile = cards; ≥860px = dense table. All classes prefixed `cat-`.
    ============================================================ */
 
+/* ---- Active filter chips ---- */
+.active-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  /* chips row sits between the filter dropdowns and the meta row */
+}
+
+.active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;          /* WCAG 2.5.5 target size on mobile */
+  padding: 0 6px 0 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  /* Default neutral palette: dark text on light tinted surface -- WCAG AA */
+  background: color-mix(in srgb, var(--chip-accent, var(--ink-muted)) 14%, var(--surface));
+  color: color-mix(in srgb, var(--chip-accent, var(--ink-muted)) 70%, #000);
+  border: 1px solid color-mix(in srgb, var(--chip-accent, var(--ink-muted)) 30%, transparent);
+  white-space: nowrap;
+  line-height: 1.2;
+  max-width: 240px;
+}
+
+.active-chip__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.active-chip__remove {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  /* Inherit the chip's text color for consistent contrast */
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.active-chip__remove:hover {
+  background: color-mix(in srgb, var(--chip-accent, var(--ink-muted)) 20%, transparent);
+}
+
+/* ---- Catalog page header with Add button ---- */
+.cat-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s3, 12px); }
+.cat-head__add { white-space: nowrap; }
+
 /* ---- Sticky search + filter controls ---- */
 .cat-controls {
   position: sticky;
@@ -43,8 +103,8 @@
 .cat-search__clear {
   position: absolute;
   right: 6px;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -83,14 +143,6 @@
   min-height: 44px;
   padding: 8px 10px;
   width: 100%;
-  background: var(--surface);
-  appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, var(--ink-muted) 50%),
-    linear-gradient(135deg, var(--ink-muted) 50%, transparent 50%);
-  background-position: calc(100% - 16px) 19px, calc(100% - 11px) 19px;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-  padding-right: 28px;
 }
 .cat-select:disabled {
   opacity: 0.55;
@@ -127,7 +179,7 @@
   font-weight: 600;
 }
 .cat-clear {
-  min-height: 36px;
+  min-height: 44px;
   padding: 4px 12px;
   font-size: 0.85rem;
   color: var(--primary);
@@ -176,6 +228,10 @@
   font-size: 0.95rem;
   color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
+}
+.cat-card__author {
+  font-size: 0.86rem;
+  margin-top: -2px;
 }
 .cat-card__tags {
   display: flex;
@@ -226,11 +282,13 @@
   }
   .cat-table-wrap {
     display: block;
-    overflow: hidden;
+    /* Scroll horizontally instead of crushing the 9+ columns on narrow laptops. */
+    overflow-x: auto;
     padding: 0;
   }
   .cat-table {
     width: 100%;
+    min-width: 880px;
     border-collapse: collapse;
     font-size: 0.92rem;
   }
@@ -307,11 +365,18 @@
     font-variant-numeric: tabular-nums;
   }
   .cat-td--notes {
-    max-width: 220px;
+    max-width: 130px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 0.85rem;
+  }
+  .cat-td--author {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.88rem;
   }
   .cat-warn {
     color: var(--warn);
@@ -409,7 +474,7 @@
   margin-left: auto;
 }
 .cat-bulk-select {
-  min-height: 40px;
+  min-height: 44px;
   padding: 6px 10px;
   max-width: 190px;
 }
@@ -422,4 +487,18 @@
 .cat-bulkloc .input {
   min-height: 40px;
   flex: 1 1 160px;
+}
+
+/* ---- Infinite scroll sentinel + footer ---- */
+.cat-sentinel { height: 1px; }
+.cat-showing { text-align: center; margin-top: var(--s3, 12px); }
+
+/* ---- Narrow-phone: stack filters to a single column ---- */
+@media (max-width: 480px) {
+  .cat-filters {
+    grid-template-columns: 1fr;
+  }
+  .cat-toggle {
+    grid-column: 1;
+  }
 }

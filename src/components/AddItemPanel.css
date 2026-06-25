@@ -1,0 +1,36 @@
+/* Full-screen "Add item" overlay: covers the whole page on every screen, so the
+   page behind (and its infinite scroll) is hidden and locked while it's open. */
+.addpanel {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  background: var(--paper, #f4efe3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.addpanel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3, 12px);
+  padding: var(--s3, 12px) var(--s4, 16px);
+  border-bottom: 1px solid var(--border, #e5e5e5);
+  background: var(--paper, #f4efe3);
+}
+.addpanel__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+.addpanel__body {
+  overflow-y: auto;
+  flex: 1;
+  padding: var(--s4, 16px);
+}
+/* Keep the form a comfortable reading width on large screens. */
+.addpanel__inner {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}

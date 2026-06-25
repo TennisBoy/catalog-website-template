@@ -7,7 +7,9 @@ import { ItemDetail } from './screens/ItemDetail'
 import { ShelfView } from './screens/ShelfView'
 import { Labels } from './screens/Labels'
 import { Review } from './screens/Review'
+import { LostItem } from './screens/LostItem'
 import { ExportPage } from './screens/ExportPage'
+import { About } from './screens/About'
 import { useCatalog } from './store/useCatalog'
 
 export function App() {
@@ -21,15 +23,16 @@ export function App() {
         <Route path="shelves" element={<ShelfView />} />
         <Route path="labels" element={<Labels />} />
         <Route path="export" element={<ExportPage />} />
+        <Route path="about" element={<About />} />
 
         {readOnly ? (
           // Public site: items open a read-only detail; no write routes exist.
           <Route path="item/:id" element={<ItemDetail />} />
         ) : (
           <>
-            <Route path="add" element={<ItemForm />} />
             <Route path="item/:id" element={<ItemForm />} />
             <Route path="review" element={<Review />} />
+            <Route path="lost" element={<LostItem />} />
           </>
         )}
 

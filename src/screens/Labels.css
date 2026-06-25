@@ -172,11 +172,6 @@
   accent-color: var(--primary);
 }
 
-.lbl-future {
-  margin: 0;
-  font-size: 0.85rem;
-}
-
 .lbl-actions {
   display: flex;
   align-items: center;
@@ -223,6 +218,10 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
+.lbl-sheet--small {
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+
 .lbl-label {
   position: relative;
   display: flex;
@@ -238,6 +237,24 @@
 
 .lbl-sheet--medium .lbl-label {
   min-height: 110px;
+}
+
+/* Small: a compact single-line label (prints 1.6 cm tall). */
+.lbl-sheet--small .lbl-label {
+  min-height: 64px;
+}
+.lbl-sheet--small .lbl-label__band {
+  height: 12px;
+}
+.lbl-sheet--small .lbl-label__body {
+  padding: var(--s2) var(--s3);
+  gap: 2px;
+}
+.lbl-sheet--small .lbl-label__cat {
+  font-size: 1.15rem;
+}
+.lbl-sheet--small .lbl-label__line {
+  font-size: 1rem;
 }
 
 .lbl-label__band {
@@ -339,6 +356,22 @@
     min-height: 60mm;
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* Small: fixed 1.6 cm tall, more per row, tighter type. */
+  .lbl-sheet--small {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6mm;
+  }
+  .lbl-sheet--small .lbl-label {
+    min-height: 16mm;
+    height: 16mm;
+  }
+  .lbl-sheet--small .lbl-label__body {
+    padding: 1mm 2mm;
+  }
+  .lbl-sheet--small .lbl-label__band {
+    height: 3mm;
   }
 
   .lbl-label__band {

@@ -37,6 +37,9 @@ smoke.mjs
 # TS build cache
 *.tsbuildinfo
 
+# Agent worktrees (transient; real work lives on its own branch)
+.claude/worktrees/
+
 # Obsidian editor folder
 .obsidian/
 

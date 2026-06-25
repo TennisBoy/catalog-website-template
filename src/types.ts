@@ -11,6 +11,7 @@ export const CATEGORIES = [
   'Board Games',
   'Films',
   'Book Club',
+  'NBE',
   'Other / Uncategorized',
 ] as const
 
@@ -57,6 +58,10 @@ export interface Item {
   notes?: string
   condition?: Condition
   status: Status
+  /** Marked "no shelf needed": hides it from the Review "No shelf/location" list. */
+  shelfDismissed?: boolean
+  /** Marked "not a duplicate" ("Keep both"): hides it from the Review duplicates list. */
+  dupDismissed?: boolean
   createdAt: string
   updatedAt: string
 }

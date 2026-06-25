@@ -2,64 +2,48 @@ import { useRef, useState } from 'react'
 import type { Category } from '../types'
 import { CATEGORIES } from '../types'
 import { useCatalog } from '../store/useCatalog'
-import { itemsToCsv, csvToDrafts, downloadText } from '../store/csv'
+import { csvToDrafts, downloadText } from '../store/csv'
 import { titleCount, copyCount, dateStamp } from '../lib/format'
-import { countsByCategory, shelvesByCategory } from '../store/selectors'
-import { categoryColor } from '../data/categories'
+import { countsByCategory } from '../store/selectors'
+import { getCategoryColor } from '../lib/categoryColor'
+import { exportFull, exportByCategories, exportShelfList, categorySlug } from '../utils/export'
 import './ExportPage.css'
-
-/** Turn a category name into a filename-safe slug, e.g. "Grade 9" -> "grade-9". */
-function categorySlug(category: Category): string {
-  return category
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
-/** Build the readable "physical map": category -> shelf -> titles + copies. */
-function shelfListCsv(items: ReturnType<typeof useCatalog>['items']): string {
-  const { byCategory, unshelved } = shelvesByCategory(items)
-  const esc = (v: string) => (/[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v)
-  const rows: string[] = ['category,shelf,title,copies']
-  for (const cat of byCategory) {
-    for (const shelf of cat.shelves) {
-      for (const it of shelf.items) {
-        rows.push([cat.category, shelf.shelf, it.title, String(it.quantity)].map(esc).join(','))
-      }
-      rows.push([cat.category, shelf.shelf, 'SHELF TOTAL', String(shelf.copies)].map(esc).join(','))
-    }
-  }
-  for (const it of unshelved) {
-    rows.push([it.category, '(no shelf)', it.title, String(it.quantity)].map(esc).join(','))
-  }
-  return rows.join('\r\n')
-}
 
 type Msg = { tone: 'ok' | 'err' | 'info'; text: string } | null
 
 export function ExportPage() {
-  const { items, importItems, resetToSample, clearAll, readOnly } = useCatalog()
+  const { items, importItems, readOnly } = useCatalog()
   const fileRef = useRef<HTMLInputElement>(null)
-  const [exportCat, setExportCat] = useState<Category>(CATEGORIES[0])
+  // Which categories to include in the multi-category export (a subset).
+  const [exportCats, setExportCats] = useState<Category[]>([])
   const [importMsg, setImportMsg] = useState<Msg>(null)
 
   const titles = titleCount(items)
   const copies = copyCount(items)
   const perCategory = countsByCategory(items, true)
+  const titlesByCat = new Map(perCategory.map((c) => [c.category, c.titles]))
   const stamp = dateStamp()
 
   const downloadFull = () =>
-    downloadText(`engdep-catalog-${dateStamp()}.csv`, itemsToCsv(items))
+    downloadText(`engdep-catalog-${dateStamp()}.csv`, exportFull(items))
 
-  const downloadCategory = () => {
-    const filtered = items.filter((it) => it.category === exportCat)
-    downloadText(`engdep-${categorySlug(exportCat)}-${dateStamp()}.csv`, itemsToCsv(filtered))
+  const toggleExportCat = (c: Category) =>
+    setExportCats((prev) => (prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]))
+
+  const downloadCategories = () => {
+    if (exportCats.length === 0) return
+    const name =
+      exportCats.length === 1
+        ? `engdep-${categorySlug(exportCats[0])}-${dateStamp()}.csv`
+        : `engdep-${exportCats.length}-categories-${dateStamp()}.csv`
+    downloadText(name, exportByCategories(items, exportCats))
   }
 
   const downloadShelfList = () =>
-    downloadText(`engdep-shelf-list-${dateStamp()}.csv`, shelfListCsv(items))
+    downloadText(`engdep-shelf-list-${dateStamp()}.csv`, exportShelfList(items))
 
-  const catTitles = items.filter((it) => it.category === exportCat).length
+  const selectedCatSet = new Set(exportCats)
+  const selectedTitles = items.filter((it) => selectedCatSet.has(it.category)).length
 
   const onImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -88,20 +72,6 @@ export function ExportPage() {
     }
   }
 
-  const onReset = () => {
-    if (window.confirm('Replace the whole catalog with the built-in sample data? This cannot be undone.')) {
-      resetToSample()
-      setImportMsg({ tone: 'info', text: 'Catalog reset to sample data.' })
-    }
-  }
-
-  const onClear = () => {
-    if (window.confirm('Delete every item in the catalog? This cannot be undone.')) {
-      clearAll()
-      setImportMsg({ tone: 'info', text: 'Catalog cleared.' })
-    }
-  }
-
   return (
     <div className="page">
       <header className="page__head exp-no-print">
@@ -116,7 +86,7 @@ export function ExportPage() {
           {/* 1. Full catalog */}
           <div className="card exp-row exp-row--wide">
             <div className="exp-row__body">
-              <span className="exp-row__title">Full catalog (CSV)</span>
+              <span className="exp-row__title">Export Full catalog (CSV)</span>
               <span className="exp-row__desc muted">Every item, all columns.</span>
               <span className="exp-row__count">
                 {titles.toLocaleString()} titles · {copies.toLocaleString()} copies
@@ -129,29 +99,51 @@ export function ExportPage() {
             </div>
           </div>
 
-          {/* 2. One category */}
-          <div className="card exp-row">
+          {/* 2. Chosen categories (a subset, not the whole catalog) */}
+          <div className="card exp-row exp-row--wide">
             <div className="exp-row__body">
-              <span className="exp-row__title">Export one category</span>
-              <span className="exp-row__desc muted">Only the titles in a chosen category.</span>
+              <span className="exp-row__title">Export categories</span>
+              <span className="exp-row__desc muted">Select one or more categories to export</span>
               <span className="exp-row__count">
-                {catTitles.toLocaleString()} titles in {exportCat}
+                {exportCats.length === 0
+                  ? 'None selected'
+                  : `${exportCats.length} ${exportCats.length === 1 ? 'category' : 'categories'} · ${selectedTitles.toLocaleString()} titles selected`}
               </span>
             </div>
-            <div className="exp-row__actions">
-              <select
-                className="exp-select"
-                aria-label="Category to export"
-                value={exportCat}
-                onChange={(e) => setExportCat(e.target.value as Category)}
-              >
-                {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>
+            <div className="exp-cats" role="group" aria-label="Categories to export">
+              {CATEGORIES.map((c) => {
+                const on = selectedCatSet.has(c)
+                const n = titlesByCat.get(c) ?? 0
+                const color = getCategoryColor(c)
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    className={'exp-cat-chip' + (on ? ' exp-cat-chip--on' : '')}
+                    style={on ? { borderColor: color, background: `color-mix(in srgb, ${color} 14%, var(--surface))` } : undefined}
+                    onClick={() => toggleExportCat(c)}
+                    aria-pressed={on}
+                    disabled={n === 0}
+                  >
+                    <span className="exp-cat-dot" style={{ background: color }} aria-hidden />
                     {c}
-                  </option>
-                ))}
-              </select>
-              <button type="button" className="btn btn--primary" onClick={downloadCategory}>
+                    <span className="exp-cat-chip__n muted">{n}</span>
+                  </button>
+                )
+              })}
+            </div>
+            <div className="exp-row__actions">
+              {exportCats.length > 0 && (
+                <button type="button" className="btn" onClick={() => setExportCats([])}>
+                  Clear
+                </button>
+              )}
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={downloadCategories}
+                disabled={exportCats.length === 0}
+              >
                 ⬇ Export
               </button>
             </div>
@@ -176,11 +168,7 @@ export function ExportPage() {
           {/* 4. Printable summary */}
           <div className="card exp-row exp-row--wide">
             <div className="exp-row__body">
-              <span className="exp-row__title">Printable inventory summary</span>
-              <span className="exp-row__desc muted">
-                Totals and per-category counts for the department binder.
-              </span>
-              <span className="exp-row__count">Opens your browser print dialog</span>
+              <span className="exp-row__title">Print full catalog</span>
             </div>
             <div className="exp-row__actions">
               <button type="button" className="btn btn--primary" onClick={() => window.print()}>
@@ -230,7 +218,7 @@ export function ExportPage() {
                   <span className="exp-cat-cell">
                     <span
                       className="exp-cat-dot"
-                      style={{ background: categoryColor(c.category) }}
+                      style={{ background: getCategoryColor(c.category) }}
                       aria-hidden
                     />
                     {c.category}
@@ -314,29 +302,6 @@ export function ExportPage() {
           </div>
         )}
       </section>
-
-      {/* ---- Danger zone (editors only) ---- */}
-      {!readOnly && (
-        <section className="exp-no-print section-gap" aria-label="Danger zone">
-          <h2 className="exp-h2">Danger zone</h2>
-          <div className="card exp-danger exp-row">
-            <div className="exp-row__body">
-              <span className="exp-row__title">Reset or clear the catalog</span>
-              <span className="exp-row__desc muted">
-                Export a backup first; these can't be undone.
-              </span>
-            </div>
-            <div className="exp-danger__row">
-              <button type="button" className="btn" onClick={onReset}>
-                Reset to sample data
-              </button>
-              <button type="button" className="btn btn--danger" onClick={onClear}>
-                Clear all
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
     </div>
   )
 }

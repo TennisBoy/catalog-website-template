@@ -1,116 +1,27 @@
-import { useEffect, useMemo, useState } from 'react'
-import type { ReactNode } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import type { Category, Item, MaterialType, Status } from '../types'
-import { CATEGORIES, MATERIAL_TYPES, STATUSES, UNCATEGORIZED } from '../types'
+import { useState } from 'react'
+import type { Category, Status } from '../types'
+import { CATEGORIES, MATERIAL_TYPES, STATUSES } from '../types'
 import { useCatalog } from '../store/useCatalog'
-import { relativeTime } from '../lib/format'
-import { CategoryBadge, StatusPill } from '../components/badges'
 import { EmptyState } from '../components/EmptyState'
+import { ActiveFilterChips } from '../components/ActiveFilterChips'
+import { CatalogTable } from '../components/CatalogTable'
+import { useAddPanel } from '../components/addPanelContext'
+import { useCatalogFilters } from '../hooks/useCatalogFilters'
+import { useCatalogSort } from '../hooks/useCatalogSort'
+import { useInfiniteList } from '../hooks/useInfiniteList'
+import { useSelection } from '../hooks/useSelection'
 import './Catalog.css'
-
-type SortKey = 'title' | 'quantity' | 'category' | 'shelf' | 'updatedAt'
-type SortDir = 'asc' | 'desc'
-
-function isCategory(value: string | null): value is Category {
-  return value != null && (CATEGORIES as readonly string[]).includes(value)
-}
 
 export function Catalog() {
   const { items, readOnly, bulkUpdate, bulkRemove } = useCatalog()
-  const navigate = useNavigate()
-  const [params, setParams] = useSearchParams()
 
-  // --- filter state, initialized from URL params on mount ---
-  const [query, setQuery] = useState(() => params.get('q') ?? '')
-  const [category, setCategory] = useState<Category | 'All'>(() => {
-    const cat = params.get('cat')
-    return isCategory(cat) ? cat : 'All'
-  })
-  const [materialType, setMaterialType] = useState<MaterialType | 'All'>('All')
-  const [shelf, setShelf] = useState<string>('All')
-  const [uncatOnly, setUncatOnly] = useState(() => params.get('uncat') === '1')
+  // --- filters ---
+  const { filtered, filters } = useCatalogFilters(items)
 
-  const [sortKey, setSortKey] = useState<SortKey>('updatedAt')
-  const [sortDir, setSortDir] = useState<SortDir>('desc')
+  // --- sort ---
+  const { sorted: results, sortKey, setSortKey, sortDir, setSortDir } = useCatalogSort(filtered)
 
-  // Reflect search text back into the URL (optional, keeps it shareable).
-  useEffect(() => {
-    const next = new URLSearchParams(params)
-    if (query.trim()) next.set('q', query.trim())
-    else next.delete('q')
-    if (next.toString() !== params.toString()) setParams(next, { replace: true })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query])
-
-  // Distinct shelves present in the catalog, for the Location filter.
-  const shelves = useMemo(() => {
-    const set = new Set<string>()
-    for (const it of items) {
-      const s = it.location.shelf?.trim()
-      if (s) set.add(s)
-    }
-    return Array.from(set).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  }, [items])
-
-  const anyFilterActive =
-    query.trim() !== '' ||
-    category !== 'All' ||
-    materialType !== 'All' ||
-    shelf !== 'All' ||
-    uncatOnly
-
-  function clearAll() {
-    setQuery('')
-    setCategory('All')
-    setMaterialType('All')
-    setShelf('All')
-    setUncatOnly(false)
-  }
-
-  // --- filtering (AND) + sorting ---
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    const filtered = items.filter((it) => {
-      if (q) {
-        const hay = `${it.title} ${it.author ?? ''}`.toLowerCase()
-        if (!hay.includes(q)) return false
-      }
-      if (uncatOnly && it.category !== UNCATEGORIZED) return false
-      if (category !== 'All' && it.category !== category) return false
-      if (materialType !== 'All' && it.materialType !== materialType) return false
-      if (shelf !== 'All' && it.location.shelf !== shelf) return false
-      return true
-    })
-
-    const dir = sortDir === 'asc' ? 1 : -1
-    const sorted = [...filtered].sort((a, b) => {
-      let cmp = 0
-      switch (sortKey) {
-        case 'title':
-          cmp = a.title.localeCompare(b.title)
-          break
-        case 'quantity':
-          cmp = a.quantity - b.quantity
-          break
-        case 'category':
-          cmp = a.category.localeCompare(b.category)
-          break
-        case 'shelf':
-          cmp = (a.location.shelf || '').localeCompare(b.location.shelf || '', undefined, {
-            numeric: true,
-          })
-          break
-        case 'updatedAt':
-          cmp = a.updatedAt.localeCompare(b.updatedAt)
-          break
-      }
-      return cmp * dir
-    })
-    return sorted
-  }, [items, query, category, materialType, shelf, uncatOnly, sortKey, sortDir])
-
-  function toggleSort(key: SortKey) {
+  function toggleSort(key: typeof sortKey) {
     if (sortKey === key) {
       setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))
     } else {
@@ -120,41 +31,26 @@ export function Catalog() {
     }
   }
 
-  function sortIndicator(key: SortKey) {
-    if (sortKey !== key) return null
-    return <span className="cat-sort-arrow" aria-hidden>{sortDir === 'asc' ? '▲' : '▼'}</span>
-  }
+  // --- Add item (opens the global full-screen overlay, no navigation) ---
+  const openAdd = useAddPanel()
+
+  // --- infinite scroll ---
+  const { visible, hasMore, sentinelRef } = useInfiniteList(results)
 
   // --- bulk selection (editor only) ---
-  const [selected, setSelected] = useState<Set<string>>(() => new Set())
+  const sel = useSelection()
   const [showLoc, setShowLoc] = useState(false)
   const [bulkSection, setBulkSection] = useState('')
   const [bulkShelf, setBulkShelf] = useState('')
 
   const resultIds = results.map((r) => r.id)
-  const allSelected = resultIds.length > 0 && resultIds.every((id) => selected.has(id))
-  const someSelected = resultIds.some((id) => selected.has(id))
-  const selectedIds = [...selected]
+  const allSelected = resultIds.length > 0 && resultIds.every((id) => sel.isSelected(id))
+  const someSelected = resultIds.some((id) => sel.isSelected(id))
+  const selectedIds = [...sel.selectedIds]
   const canSelect = !readOnly
 
-  function toggleOne(id: string) {
-    setSelected((s) => {
-      const n = new Set(s)
-      if (n.has(id)) n.delete(id)
-      else n.add(id)
-      return n
-    })
-  }
-  function toggleAll() {
-    setSelected((s) => {
-      const n = new Set(s)
-      if (allSelected) resultIds.forEach((id) => n.delete(id))
-      else resultIds.forEach((id) => n.add(id))
-      return n
-    })
-  }
   function clearSel() {
-    setSelected(new Set())
+    sel.clear()
     setShowLoc(false)
   }
   function applyCategory(c: string) {
@@ -184,9 +80,16 @@ export function Catalog() {
 
   return (
     <div className="page">
-      <div className="page__head">
-        <p className="eyebrow">Catalog</p>
-        <h1>Find anything</h1>
+      <div className="page__head cat-head">
+        <div>
+          <p className="eyebrow">Catalog</p>
+          <h1>Find anything</h1>
+        </div>
+        {!readOnly && (
+          <button type="button" className="btn btn--primary cat-head__add" onClick={openAdd}>
+            ＋ Add item
+          </button>
+        )}
       </div>
 
       {/* Sticky search + filters */}
@@ -198,15 +101,15 @@ export function Catalog() {
             type="search"
             inputMode="search"
             placeholder="Search title or author…"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={filters.query}
+            onChange={(e) => filters.setQuery(e.target.value)}
             aria-label="Search by title or author"
           />
-          {query && (
+          {filters.query && (
             <button
               type="button"
               className="cat-search__clear"
-              onClick={() => setQuery('')}
+              onClick={() => filters.setQuery('')}
               aria-label="Clear search"
             >
               ⌫
@@ -219,9 +122,9 @@ export function Catalog() {
             <span className="cat-filter__label">Category</span>
             <select
               className="input cat-select"
-              value={category}
+              value={filters.category}
               onChange={(e) =>
-                setCategory(e.target.value === 'All' ? 'All' : (e.target.value as Category))
+                filters.setCategory(e.target.value === 'All' ? 'All' : (e.target.value as Category))
               }
             >
               <option value="All">All categories</option>
@@ -237,10 +140,10 @@ export function Catalog() {
             <span className="cat-filter__label">Type</span>
             <select
               className="input cat-select"
-              value={materialType}
+              value={filters.materialType}
               onChange={(e) =>
-                setMaterialType(
-                  e.target.value === 'All' ? 'All' : (e.target.value as MaterialType),
+                filters.setMaterialType(
+                  e.target.value === 'All' ? 'All' : (e.target.value as typeof filters.materialType),
                 )
               }
             >
@@ -257,12 +160,12 @@ export function Catalog() {
             <span className="cat-filter__label">Shelf</span>
             <select
               className="input cat-select"
-              value={shelf}
-              onChange={(e) => setShelf(e.target.value)}
-              disabled={shelves.length === 0}
+              value={filters.shelf}
+              onChange={(e) => filters.setShelf(e.target.value)}
+              disabled={filters.shelves.length === 0}
             >
               <option value="All">All shelves</option>
-              {shelves.map((s) => (
+              {filters.shelves.map((s) => (
                 <option key={s} value={s}>
                   {s}
                 </option>
@@ -273,12 +176,15 @@ export function Catalog() {
           <label className="cat-toggle">
             <input
               type="checkbox"
-              checked={uncatOnly}
-              onChange={(e) => setUncatOnly(e.target.checked)}
+              checked={filters.uncatOnly}
+              onChange={(e) => filters.setUncatOnly(e.target.checked)}
             />
             <span>Uncategorized only</span>
           </label>
         </div>
+
+        {/* Active filter chips, one per active filter, each removable */}
+        <ActiveFilterChips filters={filters} />
 
         <div className="cat-meta">
           {canSelect && results.length > 0 && (
@@ -289,7 +195,7 @@ export function Catalog() {
                 ref={(el) => {
                   if (el) el.indeterminate = someSelected && !allSelected
                 }}
-                onChange={toggleAll}
+                onChange={() => sel.toggleAll(resultIds)}
               />
               <span>Select all</span>
             </label>
@@ -297,8 +203,8 @@ export function Catalog() {
           <span className="cat-count muted">
             {results.length} {results.length === 1 ? 'result' : 'results'}
           </span>
-          {anyFilterActive && (
-            <button type="button" className="btn btn--ghost cat-clear" onClick={clearAll}>
+          {filters.anyActive && (
+            <button type="button" className="btn btn--ghost cat-clear" onClick={filters.clear}>
               Clear all
             </button>
           )}
@@ -306,10 +212,10 @@ export function Catalog() {
       </div>
 
       {/* Bulk action bar (editor only) */}
-      {canSelect && selected.size > 0 && (
+      {canSelect && sel.count > 0 && (
         <div className="cat-bulkbar">
           <div className="cat-bulkbar__count">
-            <strong>{selected.size}</strong> selected
+            <strong>{sel.count}</strong> selected
             <button type="button" className="btn btn--ghost cat-bulk-clear" onClick={clearSel}>
               Clear
             </button>
@@ -356,7 +262,7 @@ export function Catalog() {
             <div className="cat-bulkloc">
               <input
                 className="input"
-                placeholder="Section (e.g. Room 1)"
+                placeholder="Room (e.g. Room 1)"
                 value={bulkSection}
                 onChange={(e) => setBulkSection(e.target.value)}
               />
@@ -385,176 +291,37 @@ export function Catalog() {
                 ? 'Add your first title to start the catalog.'
                 : 'Try clearing a filter or searching for something else.'
             }
-            actionLabel={catalogEmpty ? 'Add your first item' : undefined}
-            actionTo={catalogEmpty ? '/add' : undefined}
+            actionLabel={catalogEmpty && !readOnly ? 'Add your first item' : undefined}
+            onAction={catalogEmpty && !readOnly ? openAdd : undefined}
           />
+          {!catalogEmpty && filters.anyActive && (
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'var(--s4)' }}>
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={filters.clear}
+              >
+                Clear filters
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <>
-          {/* Mobile: card list */}
-          <ul className="cat-cards">
-            {results.map((it) => (
-              <li
-                key={it.id}
-                className={'cat-card-row' + (selected.has(it.id) ? ' is-selected' : '')}
-              >
-                {canSelect && (
-                  <input
-                    type="checkbox"
-                    className="cat-card__check"
-                    checked={selected.has(it.id)}
-                    onChange={() => toggleOne(it.id)}
-                    aria-label={`Select ${it.title}`}
-                  />
-                )}
-                <Link to={`/item/${it.id}`} className="card cat-card">
-                  <div className="cat-card__top">
-                    <span className="cat-card__title">{it.title}</span>
-                    <span className="cat-card__qty">×{it.quantity}</span>
-                  </div>
-                  <div className="cat-card__tags">
-                    <CategoryBadge category={it.category} />
-                    <span className="cat-card__type muted">{it.materialType}</span>
-                  </div>
-                  <div className="cat-card__foot">
-                    <span className="cat-card__loc muted">
-                      📍 {it.location.shelf || 'No shelf'}
-                    </span>
-                    <span className="cat-card__time muted">{relativeTime(it.updatedAt)}</span>
-                    <StatusPill status={it.status} />
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Desktop: table */}
-          <div className="cat-table-wrap card">
-            <table className="cat-table">
-              <thead>
-                <tr>
-                  {canSelect && (
-                    <th className="cat-th cat-th--check">
-                      <input
-                        type="checkbox"
-                        checked={allSelected}
-                        ref={(el) => {
-                          if (el) el.indeterminate = someSelected && !allSelected
-                        }}
-                        onChange={toggleAll}
-                        aria-label="Select all"
-                      />
-                    </th>
-                  )}
-                  <Th label="Title" k="title" sortKey={sortKey} sortDir={sortDir} onSort={toggleSort} indicator={sortIndicator} />
-                  <Th label="Qty" k="quantity" sortKey={sortKey} sortDir={sortDir} onSort={toggleSort} indicator={sortIndicator} align="right" />
-                  <Th label="Category" k="category" sortKey={sortKey} sortDir={sortDir} onSort={toggleSort} indicator={sortIndicator} />
-                  <Th label="Shelf" k="shelf" sortKey={sortKey} sortDir={sortDir} onSort={toggleSort} indicator={sortIndicator} />
-                  <th className="cat-th cat-th--plain">Type</th>
-                  <th className="cat-th cat-th--plain">Notes</th>
-                  <Th label="Updated" k="updatedAt" sortKey={sortKey} sortDir={sortDir} onSort={toggleSort} indicator={sortIndicator} />
-                </tr>
-              </thead>
-              <tbody>
-                {results.map((it) => (
-                  <Row
-                    key={it.id}
-                    item={it}
-                    canSelect={canSelect}
-                    selected={selected.has(it.id)}
-                    onToggle={() => toggleOne(it.id)}
-                    onOpen={() => navigate(`/item/${it.id}`)}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <CatalogTable
+            items={visible}
+            canSelect={canSelect}
+            sel={sel}
+            sortKey={sortKey}
+            sortDir={sortDir}
+            onSort={toggleSort}
+          />
+          {hasMore && <div ref={sentinelRef} className="cat-sentinel" aria-hidden />}
+          <p className="cat-showing muted">
+            Showing {visible.length} of {results.length}
+          </p>
         </>
       )}
     </div>
-  )
-}
-
-function Th({
-  label,
-  k,
-  sortKey,
-  sortDir,
-  onSort,
-  indicator,
-  align,
-}: {
-  label: string
-  k: SortKey
-  sortKey: SortKey
-  sortDir: SortDir
-  onSort: (k: SortKey) => void
-  indicator: (k: SortKey) => ReactNode
-  align?: 'right'
-}) {
-  const ariaSort = sortKey !== k ? 'none' : sortDir === 'asc' ? 'ascending' : 'descending'
-  return (
-    <th className={`cat-th${align === 'right' ? ' cat-th--right' : ''}`} aria-sort={ariaSort}>
-      <button type="button" className="cat-th__btn" onClick={() => onSort(k)}>
-        {label}
-        {indicator(k)}
-      </button>
-    </th>
-  )
-}
-
-function Row({
-  item,
-  canSelect,
-  selected,
-  onToggle,
-  onOpen,
-}: {
-  item: Item
-  canSelect: boolean
-  selected: boolean
-  onToggle: () => void
-  onOpen: () => void
-}) {
-  return (
-    <tr
-      className={'cat-row' + (selected ? ' is-selected' : '')}
-      tabIndex={0}
-      role="link"
-      onClick={onOpen}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          onOpen()
-        }
-      }}
-    >
-      {canSelect && (
-        <td className="cat-td cat-td--check" onClick={(e) => e.stopPropagation()}>
-          <input
-            type="checkbox"
-            checked={selected}
-            onChange={onToggle}
-            aria-label={`Select ${item.title}`}
-          />
-        </td>
-      )}
-      <td className="cat-td cat-td--title">
-        {item.title}
-        {item.status !== 'Cataloged' && (
-          <span className="cat-warn" aria-label={item.status} title={item.status}>
-            {' '}⚠
-          </span>
-        )}
-      </td>
-      <td className="cat-td cat-td--right">{item.quantity}</td>
-      <td className="cat-td">
-        <CategoryBadge category={item.category} />
-      </td>
-      <td className="cat-td">{item.location.shelf || '-'}</td>
-      <td className="cat-td">{item.materialType}</td>
-      <td className="cat-td cat-td--notes muted">{item.notes?.trim() || '-'}</td>
-      <td className="cat-td muted">{relativeTime(item.updatedAt)}</td>
-    </tr>
   )
 }

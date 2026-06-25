@@ -76,6 +76,11 @@
   text-decoration: none;
   color: var(--ink);
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+  /* Works as both <a> and <button> (Add item opens the overlay in place). */
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
 }
 .dash-action:hover {
   text-decoration: none;

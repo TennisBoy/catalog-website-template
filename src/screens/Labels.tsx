@@ -2,12 +2,12 @@ import { useMemo, useState } from 'react'
 import type { Category } from '../types'
 import { CATEGORIES } from '../types'
 import { useCatalog } from '../store/useCatalog'
-import { categoryColor } from '../data/categories'
+import { getCategoryColor } from '../lib/categoryColor'
 import { EmptyState } from '../components/EmptyState'
 import './Labels.css'
 
 type LabelType = 'category' | 'shelf'
-type LabelSize = 'large' | 'medium'
+type LabelSize = 'large' | 'medium' | 'small'
 
 // A single printable label, fully resolved from the user's selection.
 interface LabelSpec {
@@ -24,6 +24,7 @@ const LABEL_TYPES: { id: LabelType; label: string }[] = [
 const SIZES: { id: LabelSize; label: string }[] = [
   { id: 'large', label: 'Large' },
   { id: 'medium', label: 'Medium' },
+  { id: 'small', label: 'Small' },
 ]
 
 export function Labels() {
@@ -113,10 +114,7 @@ export function Labels() {
       <header className="page__head lbl-head">
         <p className="eyebrow">English Department</p>
         <h1>Label Generator</h1>
-        <p className="muted">
-          Make big, room-readable labels so the shelves match the catalog. Pick what to print, then
-          send it to paper.
-        </p>
+        <p className="muted">Print shelf and category labels for the shelves.</p>
       </header>
 
       {/* ---- The on-screen builder (hidden when printing) ---- */}
@@ -171,7 +169,7 @@ export function Labels() {
                       />
                       <span
                         className="lbl-check__swatch"
-                        style={{ background: categoryColor(o.category) }}
+                        style={{ background: getCategoryColor(o.category) }}
                         aria-hidden
                       />
                       <span className="lbl-check__text">
@@ -215,11 +213,6 @@ export function Labels() {
           </label>
         </div>
 
-        <p className="muted lbl-future">
-          Tip: v1 prints plain labels. A future version will add a QR code on each label that opens
-          that shelf's filtered catalog view.
-        </p>
-
         <div className="lbl-actions">
           <button
             type="button"
@@ -252,7 +245,7 @@ export function Labels() {
       ) : (
         <div className={`lbl-sheet lbl-sheet--${size}`} aria-label="Label preview and print sheet">
           {labels.map((l) => {
-            const color = categoryColor(l.category)
+            const color = getCategoryColor(l.category)
             return (
               <article
                 key={l.key}

@@ -181,13 +181,21 @@
 .rev-dup-item {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: var(--s2);
   padding: var(--s1) var(--s2);
   border-radius: var(--r-input);
 }
 .rev-dup-item--keep {
   background: color-mix(in srgb, var(--success) 10%, transparent);
+}
+/* Per-row "Keep only this": pushed to the row's end, deletes the other rows. */
+.rev-dup-item__keep-btn {
+  margin-left: auto;
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 0 var(--s3);
+  font-size: 0.82rem;
 }
 
 .rev-dup-item__title {

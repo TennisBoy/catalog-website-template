@@ -169,6 +169,20 @@ ul {
   box-shadow: 0 0 0 3px var(--primary-tint);
 }
 
+/* Every dropdown shares one look: rounded corners (no native chrome that ignores
+   border-radius) and the same custom caret, so all selects match each other. */
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-muted) 50%),
+    linear-gradient(135deg, var(--ink-muted) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
 /* Pills / badges */
 .pill {
   display: inline-flex;
